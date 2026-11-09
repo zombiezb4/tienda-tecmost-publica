@@ -1,0 +1,1524 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="TecMost — Tienda de tecnología: computadoras, componentes, monitores y videovigilancia en Oaxaca. Arma tu PC o tu sistema de cámaras y pide por WhatsApp." />
+    <link rel="icon" href="data:," />
+    <title>TecMost — Tienda de Tecnología</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-alt: #eceee9;
+        --text: #10151a;
+        --dim: #5c665f;
+        --border: #dde1dc;
+        --silver-face: linear-gradient(180deg,#c9c9c9 0%,#e2e2e2 18%,#ffffff 34%,#ececec 48%,#c6c6c6 64%,#a3a3a3 82%,#7f7f7f 100%);
+        --silver-text-gradient: linear-gradient(180deg,#3f3f3f 0%,#6f6f6f 24%,#8f8f8f 38%,#565656 54%,#7d7d7d 72%,#2f2f2f 100%);
+        --accent: #595959;
+        --good: #1d7a3a;
+        --warn: #b25e00;
+        --bad: #b3261e;
+        --radius: 6px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1113;
+          --surface: #171b1e;
+          --surface-alt: #21262a;
+          --text: #eef1ee;
+          --dim: #9aa79e;
+          --border: #2c3330;
+          --accent: #d6d6d6;
+          --silver-text-gradient: linear-gradient(180deg,#9a9a9a 0%,#d9d9d9 26%,#ffffff 40%,#e8e8e8 56%,#b5b5b5 78%,#8a8a8a 100%);
+          --good: #4cc36e;
+          --warn: #e8a04c;
+          --bad: #e86a63;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .font-display { font-family: "Archivo", system-ui, sans-serif; }
+      .price-num { font-family: "Archivo", system-ui, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+      .silver-btn {
+        background-color: #bdbdbd;
+        background-image: var(--silver-face);
+        border: 1px solid #7d7d7d;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.85), inset 0 -1px 0 rgba(0,0,0,.22), 0 1px 2px rgba(0,0,0,.2);
+        color: #1c1c1c;
+        text-shadow: 0 1px 0 rgba(255,255,255,.45);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .silver-text {
+        background-image: var(--silver-text-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      @supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+        .silver-text { color: var(--accent); -webkit-text-fill-color: currentColor; }
+      }
+      button { font: inherit; background: none; border: none; color: inherit; }
+      img { display: block; }
+      .wrap { max-width: 1152px; margin: 0 auto; padding-left: 16px; padding-right: 16px; }
+
+      /* Header */
+      header.site {
+        position: sticky; top: 0; z-index: 20;
+        border-bottom: 1px solid var(--border);
+        background: color-mix(in srgb, var(--bg) 95%, transparent);
+        backdrop-filter: blur(8px);
+        padding-top: env(safe-area-inset-top);
+      }
+      .header-in { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; row-gap: 8px; padding-top: 12px; padding-bottom: 12px; }
+      .logo { width: 44px; height: 44px; border-radius: 10px; background: #fff; object-fit: cover; box-shadow: 0 1px 2px rgba(0,0,0,.2); outline: 1px solid rgba(0,0,0,.15); flex-shrink: 0; }
+      @media (min-width: 640px) { .logo { width: 48px; height: 48px; } }
+      h1.store-name { margin: 0; flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 20px; font-weight: 900; letter-spacing: -0.02em; }
+      nav.views { display: flex; gap: 4px; width: 100%; overflow-x: auto; border: 1px solid var(--border); background: var(--surface); border-radius: 999px; padding: 4px; flex-shrink: 0; }
+      @media (min-width: 640px) { nav.views { width: auto; } }
+      nav.views button { white-space: nowrap; border-radius: 999px; padding: 6px 12px; font-family: "Archivo", system-ui, sans-serif; font-size: 14px; font-weight: 700; color: var(--dim); cursor: pointer; }
+      @media (min-width: 640px) { nav.views button { padding: 6px 16px; } }
+      nav.views button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+      main { padding-top: 16px; padding-bottom: 40px; }
+
+      /* Inputs & buttons */
+      .input { width: 100%; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 10px 12px; font-size: 16px; color: var(--text); outline: none; }
+      .input:focus { border-color: var(--accent); }
+      .btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 8px 12px; font-size: 14px; font-weight: 600; color: var(--text); cursor: pointer; text-decoration: none; }
+      .btn-ghost:disabled { opacity: .5; }
+      .btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius); padding: 10px 16px; font-family: "Archivo", system-ui, sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+      .btn-primary:disabled { opacity: .5; }
+      .btn-ghost svg, .btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
+      .sum-actions .btn-primary svg { width: 20px; height: 20px; }
+      .pp-top .btn-ghost { white-space: nowrap; }
+      .step-pick svg { width: 16px; height: 16px; }
+
+      /* Search */
+      .search-box { position: relative; }
+      .search-box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--dim); pointer-events: none; }
+      .search-box .input { padding-left: 40px; }
+      .snapshot-note { margin: 8px 0 0; font-size: 12px; color: var(--dim); }
+
+      /* Section selector */
+      .section-label { display: block; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; margin-top: 16px; }
+      .section-menu-wrap { position: relative; margin-top: 8px; }
+      .section-trigger { display: flex; align-items: center; gap: 12px; text-align: left; font-weight: 600; cursor: pointer; }
+      .section-trigger .sec-ico, .section-option .sec-ico { display: flex; width: 36px; height: 36px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface-alt); color: var(--text); }
+      .section-option .sec-ico { background: var(--surface); }
+      .section-trigger .sec-ico svg, .section-option .sec-ico svg { width: 20px; height: 20px; }
+      .section-trigger .sec-name, .section-option .sec-name { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .sec-count { font-weight: 400; color: var(--dim); }
+      .section-trigger > svg.chev { width: 20px; height: 20px; flex-shrink: 0; color: var(--dim); transition: transform .15s; }
+      .section-trigger > svg.chev.open { transform: rotate(180deg); }
+      .section-menu { position: absolute; left: 0; right: 0; top: 100%; z-index: 30; margin-top: 8px; max-height: 384px; overflow-y: auto; overscroll-behavior: contain; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 6px 0; box-shadow: 0 20px 40px rgba(0,0,0,.25); }
+      .section-group-label { padding: 10px 12px 2px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 0; }
+      .section-option { display: flex; width: 100%; align-items: center; gap: 12px; padding: 8px 12px; text-align: left; font-size: 16px; font-weight: 600; color: var(--text); cursor: pointer; }
+      .section-option[aria-selected="true"] { background: var(--surface-alt); }
+      .section-option > svg.check { width: 20px; height: 20px; flex-shrink: 0; }
+      .section-help { margin: 6px 0 0; font-size: 12px; font-weight: 600; color: var(--dim); }
+
+      /* Builder entry cards */
+      .builder-entry { margin-top: 12px; display: flex; width: 100%; align-items: center; gap: 12px; border-radius: var(--radius); border: 2px solid var(--text); background: var(--surface); padding: 12px 16px; text-align: left; cursor: pointer; color: var(--text); }
+      .builder-entry .be-ico { display: flex; width: 40px; height: 40px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); background: var(--text); color: var(--bg); }
+      .builder-entry .be-ico svg { width: 20px; height: 20px; }
+      .builder-entry .be-text { flex: 1 1 0; min-width: 0; }
+      .builder-entry .be-title { display: block; font-size: 16px; font-weight: 800; }
+      .builder-entry .be-sub { display: block; font-size: 12px; line-height: 1.35; color: var(--dim); }
+      .builder-entry > svg.arrow { width: 20px; height: 20px; flex-shrink: 0; color: var(--dim); transform: rotate(180deg); }
+
+      /* Product grid & cards */
+      .grid-products { margin-top: 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      @media (min-width: 640px) { .grid-products { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 1024px) { .grid-products { grid-template-columns: repeat(4, 1fr); } }
+      .card { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); }
+      .card-photo { position: relative; display: block; width: 100%; aspect-ratio: 4/3; background: #fff; padding: 0; cursor: pointer; }
+      .card-photo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+      .card-photo .no-photo { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--dim); }
+      .card-photo .no-photo svg { width: 40px; height: 40px; }
+      .card-body { display: flex; flex: 1; flex-direction: column; gap: 4px; padding: 12px; }
+      .card-eyebrow { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: .04em; color: var(--dim); }
+      .card-name { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; }
+      .card-name button { text-align: left; color: var(--text); cursor: pointer; padding: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .stock-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text); }
+      .stock-dot { width: 8px; height: 8px; border-radius: 999px; flex-shrink: 0; }
+      .dot-good { background: var(--good); } .dot-warn { background: var(--warn); } .dot-bad { background: var(--bad); }
+      .avail-label { margin: 4px 0 0; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--dim); }
+      .branch-list { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; }
+      .branch-list li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 8px; font-size: 12px; color: var(--dim); }
+      .branch-list li.is-main { border: 1px solid var(--accent); background: var(--surface-alt); font-weight: 700; color: var(--text); }
+      .branch-list li .q { font-family: "Archivo", system-ui, sans-serif; font-weight: 700; }
+      .others-btn { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 6px 10px; font-size: 12px; font-weight: 700; color: var(--text); cursor: pointer; }
+      .others-btn svg { width: 16px; height: 16px; }
+      .others-btn svg.open { transform: rotate(180deg); }
+      .avail-warning { margin: 6px 0 0; font-size: 12px; font-weight: 600; color: var(--warn); }
+      .avail-note { margin: 4px 0 0; font-size: 11px; color: var(--dim); }
+      .card-price { margin: auto 0 0; padding-top: 8px; font-size: 24px; font-weight: 900; line-height: 1.1; }
+      .card-iva { margin: 0; font-size: 11px; color: var(--dim); }
+      .btn-order { margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius); padding: 10px 12px; font-size: 14px; font-weight: 700; }
+      .btn-order svg { width: 16px; height: 16px; }
+      .btn-agotado { margin-top: 8px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius); background: var(--surface-alt); padding: 10px 12px; font-size: 14px; font-weight: 700; color: var(--dim); border: none; cursor: not-allowed; font-family: inherit; }
+      .ficha-link { margin-top: 6px; font-size: 12px; font-weight: 700; color: var(--dim); text-decoration: underline dotted; text-underline-offset: 2px; cursor: pointer; padding: 0; text-align: center; }
+      .list-status { margin-top: 20px; text-align: center; }
+      .list-status p { margin: 0; font-size: 12px; font-weight: 600; color: var(--dim); }
+      .list-status .btn-ghost { margin-top: 8px; }
+      .results-note { margin: 16px 0 0; font-size: 14px; color: var(--dim); }
+      .results-note strong { color: var(--text); }
+      .section-heading { margin-top: 16px; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 4px; }
+      .section-heading h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+      .section-heading span { font-size: 14px; font-weight: 600; color: var(--dim); }
+      .empty-note { margin-top: 40px; text-align: center; font-size: 14px; color: var(--dim); }
+
+      /* Product page */
+      .pp-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      .pp-badge { background: var(--text); color: var(--bg); padding: 2px 8px; font-size: 11px; font-weight: 700; letter-spacing: .04em; }
+      .pp-badge.alt { background: var(--surface-alt); color: var(--text); }
+      .pp-cat { font-size: 12px; font-weight: 600; color: var(--dim); }
+      .pp-grid { margin-top: 16px; display: grid; gap: 24px; }
+      @media (min-width: 1024px) { .pp-grid { grid-template-columns: 1fr 1fr; } }
+      .pp-photo { position: relative; aspect-ratio: 1/1; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; }
+      .pp-photo img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
+      .pp-photo .no-photo { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--dim); }
+      .pp-photo .no-photo svg { width: 64px; height: 64px; }
+      .pp-sku { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--dim); }
+      .pp-title { margin: 4px 0 0; font-size: 24px; font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; }
+      @media (min-width: 640px) { .pp-title { font-size: 30px; } }
+      .pp-stockline { margin-top: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .pp-stockline .txt { font-size: 14px; color: var(--dim); }
+      .pp-specs { margin-top: 16px; }
+      .pp-specs h3, .pp-h3 { margin: 0; font-size: 16px; font-weight: 700; }
+      .pp-h3-lg { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+      .pp-specs ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+      .pp-specs li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.4; }
+      .pp-specs li svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--good); }
+      .price-box { margin-top: 20px; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); }
+      .price-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--surface); padding: 12px 16px; }
+      .price-row.alt { border-top: 1px solid var(--border); background: var(--surface-alt); }
+      .price-row .pl { font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--dim); margin: 0; }
+      .price-row .ps { font-size: 11px; color: var(--dim); margin: 0; }
+      .price-row .pv-big { font-size: 30px; font-weight: 900; margin: 0; }
+      .price-row .pv-card { font-size: 20px; font-weight: 900; margin: 0; }
+      .price-row .card-ico { display: flex; align-items: center; gap: 8px; }
+      .price-row .card-ico svg { width: 20px; height: 20px; color: var(--dim); }
+      .pp-actions { margin-top: 20px; display: grid; gap: 8px; }
+      .btn-order-big { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius); padding: 14px 16px; font-family: "Archivo", system-ui, sans-serif; font-size: 16px; font-weight: 700; }
+      .btn-order-big svg { width: 20px; height: 20px; }
+      .btn-agotado-big { display: inline-flex; width: 100%; align-items: center; justify-content: center; border-radius: var(--radius); background: var(--surface-alt); padding: 14px 16px; font-family: "Archivo", system-ui, sans-serif; font-size: 16px; font-weight: 700; color: var(--dim); border: none; cursor: not-allowed; }
+      .pp-actions .btn-ghost { width: 100%; padding-top: 12px; padding-bottom: 12px; }
+      .pp-actions .btn-ghost svg { width: 16px; height: 16px; }
+      .pp-section { margin-top: 32px; }
+      .ficha-table-wrap { margin-top: 12px; max-width: 768px; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); }
+      table.ficha { width: 100%; border-collapse: collapse; font-size: 14px; }
+      table.ficha th { width: 40%; padding: 8px 12px; text-align: left; vertical-align: top; font-weight: 600; color: var(--dim); }
+      table.ficha td { padding: 8px 12px; font-weight: 500; }
+      table.ficha tr:nth-child(odd) { background: var(--surface); }
+      table.ficha tr:nth-child(even) { background: var(--surface-alt); }
+      .related-grid { margin-top: 12px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      @media (min-width: 640px) { .related-grid { grid-template-columns: repeat(4, 1fr); } }
+      .related-card { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); text-align: left; padding: 0; cursor: pointer; color: var(--text); }
+      .related-card .rc-photo { display: block; aspect-ratio: 4/3; background: #fff; width: 100%; }
+      .related-card .rc-photo img { width: 100%; height: 100%; object-fit: contain; padding: 8px; }
+      .related-card .rc-photo .no-photo { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--dim); }
+      .related-card .rc-photo .no-photo svg { width: 32px; height: 32px; }
+      .related-card .rc-body { display: flex; flex: 1; flex-direction: column; gap: 4px; padding: 12px; width: 100%; }
+      .related-card .rc-name { font-size: 14px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .related-card .rc-price { margin-top: auto; padding-top: 4px; font-size: 18px; font-weight: 900; }
+
+      /* Builders */
+      .builder-head { display: flex; align-items: flex-start; gap: 12px; }
+      .builder-head .bh-ico { display: flex; width: 44px; height: 44px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); background: var(--text); color: var(--bg); }
+      .builder-head .bh-ico svg { width: 24px; height: 24px; }
+      .builder-head h2 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: -0.02em; }
+      .builder-head p { margin: 2px 0 0; max-width: 672px; font-size: 14px; line-height: 1.55; color: var(--dim); }
+      .builder-progress { margin: 12px 0 0; font-size: 14px; font-weight: 600; }
+      .builder-progress .ok { color: var(--good); } .builder-progress .warn { color: var(--warn); } .builder-progress .dim { color: var(--dim); }
+      .builder-steps { margin-top: 16px; display: grid; gap: 12px; }
+      .step { border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 12px; }
+      .step-head { display: flex; align-items: center; gap: 8px; }
+      .step-head h3 { margin: 0; flex: 1 1 0; min-width: 0; font-size: 16px; font-weight: 800; }
+      .base-tag { margin-left: 8px; background: var(--surface-alt); padding: 2px 6px; font-size: 10px; font-weight: 700; letter-spacing: .04em; color: var(--dim); vertical-align: middle; }
+      .step-hint { font-size: 12px; color: var(--dim); }
+      .step-empty { margin: 8px 0 0; font-size: 14px; color: var(--dim); }
+      .step-pick { margin-top: 8px; }
+      @media (min-width: 640px) { .step-pick { width: auto; } }
+      .sel-row { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
+      .sel-thumb { width: 56px; height: 56px; flex-shrink: 0; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; padding: 0; cursor: pointer; }
+      .sel-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+      .sel-thumb .no-photo { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--dim); }
+      .sel-thumb .no-photo svg { width: 24px; height: 24px; }
+      .sel-info { flex: 1 1 0; min-width: 0; }
+      .sel-name { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .sel-meta { margin-top: 2px; display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; row-gap: 2px; }
+      .sel-price { font-size: 16px; font-weight: 900; }
+      .other-note { font-size: 11px; font-weight: 700; color: var(--warn); }
+      .sel-actions { display: flex; flex-shrink: 0; flex-direction: column; gap: 4px; align-items: stretch; }
+      .btn-remove { font-size: 12px; font-weight: 600; color: var(--bad); cursor: pointer; padding: 2px 4px; }
+      .qty-row { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+      .qty-row label { font-size: 12px; font-weight: 600; color: var(--dim); }
+      .qty-row input { width: 64px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 6px 8px; text-align: center; font-size: 14px; font-weight: 700; color: var(--text); }
+      .qty-total { font-size: 12px; font-weight: 700; }
+      .cand-list { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--border); display: grid; gap: 8px; }
+      @media (min-width: 640px) { .cand-list { grid-template-columns: 1fr 1fr; } }
+      .cand { display: flex; width: 100%; align-items: center; gap: 12px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); padding: 8px; text-align: left; cursor: pointer; color: var(--text); }
+      .cand.is-sel { border-color: var(--accent); background: var(--surface-alt); }
+      .cand:disabled { opacity: .5; cursor: not-allowed; }
+      .cand-thumb { width: 48px; height: 48px; flex-shrink: 0; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; }
+      .cand-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+      .cand-thumb .no-photo { display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; color: var(--dim); }
+      .cand-thumb .no-photo svg { width: 20px; height: 20px; }
+      .cand-info { flex: 1 1 0; min-width: 0; }
+      .cand-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 14px; font-weight: 600; line-height: 1.35; }
+      .cand-meta { margin-top: 2px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+      .cand-price { font-size: 14px; font-weight: 900; }
+      .chip { background: var(--surface-alt); padding: 1px 4px; font-size: 10px; font-weight: 700; color: var(--text); }
+      .chip-outline { border: 1px solid var(--warn); padding: 2px 6px; font-size: 10px; font-weight: 700; color: var(--warn); background: transparent; }
+      .suggested-note { font-size: 10px; font-weight: 600; color: var(--dim); }
+      .cand-warn { display: block; margin-top: 2px; font-size: 11px; font-weight: 700; color: var(--warn); }
+      .cand-bad { display: block; margin-top: 2px; font-size: 11px; font-weight: 700; color: var(--bad); }
+      .cand > svg.check { width: 20px; height: 20px; flex-shrink: 0; color: var(--good); }
+      .cand-more { margin-top: 12px; text-align: center; }
+      .cand-more p { margin: 0 0 8px; font-size: 12px; font-weight: 600; color: var(--dim); }
+      .summary { margin-top: 20px; border-radius: var(--radius); border: 2px solid var(--text); background: var(--surface); padding: 16px; }
+      .summary h3 { margin: 0; font-size: 18px; font-weight: 800; }
+      .summary ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+      .summary li { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-size: 14px; }
+      .summary li .sl { min-width: 0; color: var(--dim); }
+      .summary li .sl strong { color: var(--text); }
+      .summary li .sl .nm { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+      .summary li .sp { flex-shrink: 0; font-weight: 700; }
+      .summary .other-note { display: block; }
+      .sum-block { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
+      .sum-row { display: flex; align-items: baseline; justify-content: space-between; font-size: 14px; }
+      .sum-row .k { color: var(--dim); } .sum-row .v { font-weight: 700; }
+      .sum-total { margin-top: 12px; display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 12px; }
+      .sum-total .k { font-family: "Archivo", system-ui, sans-serif; font-size: 16px; font-weight: 800; }
+      .sum-total .v { font-size: 30px; font-weight: 900; }
+      .sum-card-note { margin: 2px 0 0; text-align: right; font-size: 12px; color: var(--dim); }
+      .sum-warn { margin: 8px 0 0; font-size: 14px; font-weight: 600; color: var(--warn); }
+      .sum-ok { margin: 8px 0 0; font-size: 14px; font-weight: 600; color: var(--good); }
+      .sum-dim { margin: 8px 0 0; font-size: 14px; color: var(--dim); }
+      .sum-tiny { margin: 4px 0 0; font-size: 12px; line-height: 1.55; color: var(--dim); }
+      .conflict-box { margin-top: 8px; border-radius: var(--radius); border: 2px solid var(--bad); padding: 8px 12px; }
+      .conflict-box p { margin: 0; font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--bad); }
+      .sum-actions { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+      fieldset.warranty { margin: 12px 0 0; border: none; padding: 0; }
+      fieldset.warranty legend { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; padding: 0; }
+      fieldset.warranty legend svg { width: 16px; height: 16px; }
+      .warranty-opts { margin-top: 6px; display: grid; gap: 6px; }
+      @media (min-width: 640px) { .warranty-opts { grid-template-columns: repeat(3, 1fr); } }
+      .warranty-opt { display: flex; cursor: pointer; align-items: center; gap: 8px; border-radius: var(--radius); border: 1px solid var(--border); padding: 8px 10px; font-size: 12px; font-weight: 600; color: var(--dim); }
+      .warranty-opt.sel { border-color: var(--accent); background: var(--surface-alt); color: var(--text); }
+      .warranty-opt input { width: 16px; height: 16px; accent-color: var(--accent); flex-shrink: 0; }
+      .warranty-opt .sub { display: block; font-size: 11px; font-weight: 400; }
+      .builder-empty { margin-top: 16px; border-radius: var(--radius); border: 1px dashed var(--border); background: var(--surface); padding: 32px 16px; text-align: center; }
+      .builder-empty svg { width: 40px; height: 40px; color: var(--dim); }
+      .builder-empty .t { margin: 12px 0 0; font-size: 18px; font-weight: 700; }
+      .builder-empty .s { margin: 4px auto 0; max-width: 448px; font-size: 14px; color: var(--dim); }
+      .loading-note { padding: 48px 0; text-align: center; font-size: 14px; color: var(--dim); }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap header-in">
+        <img class="logo" src="assets/logo.jpg" alt="Logo de la tienda: personaje alienígena de cabello rubio y traje blanco" width="48" height="48" />
+        <h1 class="store-name silver-text font-display" id="storeName">TecMost</h1>
+        <nav class="views" aria-label="Vista de la tienda">
+          <button type="button" id="navTienda" aria-pressed="true" aria-label="Ver la tienda como cliente">Tienda</button>
+          <button type="button" id="navPc" aria-pressed="false" aria-label="Abrir el armador de PC">Arma tu PC</button>
+          <button type="button" id="navCctv" aria-pressed="false" aria-label="Abrir el armador de videovigilancia">Videovigilancia</button>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap" id="app">
+      <p class="loading-note" id="loadingNote">Cargando tu tienda…</p>
+      <div id="viewTienda" hidden></div>
+      <div id="viewProducto" hidden></div>
+      <div id="viewPc" hidden></div>
+      <div id="viewCctv" hidden></div>
+    </main>
+    <script src="assets/catalog.js"></script>
+    <script>
+    "use strict";
+    /* Catálogo fijo de la tienda (copia pública): window.__CATALOG__ trae un
+       arreglo por producto: [id, nombre, clave, precio_centavos,
+       piezas_sucursal_principal, piezas_otras_sucursales,
+       disponibilidad_por_sucursal, cat_pc, cat_cctv, categoria,
+       ficha_tecnica, tiene_foto]. Sin costos ni datos del panel. */
+    var SETTINGS = window.__SETTINGS__ || {
+      store_name: "TecMost", whatsapp: "", iva_included: true,
+      main_branch: "Oaxaca", card_surcharge_pct: 0,
+      warranty_pct_new: 10, warranty_pct_existing: 100
+    };
+    var RAW = window.__CATALOG__ || [];
+    var PRODUCTS = RAW.map(function (r) {
+      var sellable = r[4];
+      return {
+        id: r[0], name: r[1], sku: r[2], price_cents: r[3],
+        sellable_qty: sellable, other_branches_qty: r[5],
+        branch_stock: r[6] ? r[6].map(function (b) { return { branch: b[0], qty: b[1] }; }) : null,
+        builder_cat: r[7], cctv_cat: r[8], category: r[9],
+        tech_specs: (r[10] || []).map(function (t) { return { label: t[0], value: t[1] }; }),
+        has_image: r[11] === 1,
+        stock_status: sellable <= 0 ? "agotado" : sellable <= 5 ? "poco" : "disponible"
+      };
+    });
+    var BY_ID = {};
+    PRODUCTS.forEach(function (p) { BY_ID[p.id] = p; });
+    var WA_DIGITS = (SETTINGS.whatsapp || "").replace(/\D/g, "");
+    var SNAPSHOT_LABEL = "9 de noviembre de 2026";
+
+    function esc(s) {
+      return String(s == null ? "" : s)
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    function fmtMXN(cents) {
+      return (cents / 100).toLocaleString("es-MX", { style: "currency", currency: "MXN", minimumFractionDigits: 2 });
+    }
+    function imgUrl(p) {
+      if (!p.has_image || !p.sku) return null;
+      return "https://static.ctonline.mx/imagenes/" + encodeURIComponent(p.sku) + "/" + encodeURIComponent(p.sku) + "_400.jpg";
+    }
+    function cardPriceCents(cents) {
+      return Math.round(cents * (1 + SETTINGS.card_surcharge_pct / 100));
+    }
+    function isMainBranchName(name, mainBranch) {
+      var a = (name || "").trim().toLowerCase(), b = (mainBranch || "").trim().toLowerCase();
+      if (!a || !b) return false;
+      return a.indexOf(b) >= 0 || b.indexOf(a) >= 0;
+    }
+    function builderHasStock(p) { return p.sellable_qty + p.other_branches_qty > 0; }
+    function builderOtherBranchOnly(p) { return p.sellable_qty <= 0 && p.other_branches_qty > 0; }
+    function otherBranchSummary(p) {
+      if (!p.branch_stock) return "";
+      return p.branch_stock
+        .filter(function (b) { return !isMainBranchName(b.branch, SETTINGS.main_branch) && b.qty > 0; })
+        .map(function (b) { return b.branch + " " + b.qty; }).join(" · ");
+    }
+    function specsFromName(name) {
+      var parts = name.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s.length >= 2; });
+      return parts.length >= 3 ? parts.slice(1, 9) : [];
+    }
+    function productTechText(p) {
+      return p.name + " " + p.tech_specs.map(function (t) { return t.label + " " + t.value; }).join(" ");
+    }
+    function detectSocket(text) {
+      var t = text.toUpperCase();
+      if (/\bAM5\b/.test(t)) return "AM5";
+      if (/\bAM4\b/.test(t)) return "AM4";
+      if (/\bAM3\+?\b/.test(t)) return "AM3";
+      if (/LGA\s*-?\s*1700|S-1700/.test(t)) return "LGA 1700";
+      if (/LGA\s*-?\s*1200/.test(t)) return "LGA 1200";
+      if (/LGA\s*-?\s*1151/.test(t)) return "LGA 1151";
+      if (/LGA\s*-?\s*1150/.test(t)) return "LGA 1150";
+      if (/\bTR4\b/.test(t)) return "TR4";
+      return null;
+    }
+    function detectRamType(text) {
+      var t = text.toUpperCase();
+      if (/DDR5/.test(t)) return "DDR5";
+      if (/DDR4/.test(t)) return "DDR4";
+      if (/DDR3/.test(t)) return "DDR3";
+      return null;
+    }
+    function productSocket(p) { return detectSocket(productTechText(p)); }
+    function productRamType(p) { return detectRamType(productTechText(p)); }
+
+    /* Iconos (trazo, sin emoji) */
+    var I = {
+      link: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
+      plus: "M12 5v14 M5 12h14",
+      search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.35-4.35",
+      box: "M21 8l-9-5-9 5v8l9 5 9-5V8z M3 8l9 5 9-5 M12 13v8",
+      grid: "M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z",
+      trash: "M3 6h18 M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2 M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6",
+      check: "M20 6L9 17l-5-5",
+      chevron: "m6 9 6 6 6-6",
+      cpu: "M5 5h14v14H5z M9 2v3 M15 2v3 M9 19v3 M15 19v3 M2 9h3 M2 15h3 M19 9h3 M19 15h3 M9.5 9.5h5v5h-5z",
+      card: "M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6z M2 10h20",
+      shield: "M12 22s8-3.6 8-10V5l-8-3-8 3v7c0 6.4 8 10 8 10z",
+      wrench: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
+      video: "M23 7l-7 5 7 5V7z M14 5H3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z",
+      back: "M19 12H5 M12 19l-7-7 7-7",
+      laptop: "M4 16V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v10 M2 16h20l-1.5 3.5h-17L2 16z",
+      board: "M6 2v2 M12 2v2 M18 2v2 M6 20v2 M12 20v2 M18 20v2 M2 6h2 M2 12h2 M2 18h2 M20 6h2 M20 12h2 M20 18h2 M5 5h14v14H5z M10 10h4v4h-4z",
+      ram: "M3 8h18v6H3z M6 14v3 M10 14v3 M14 14v3 M18 14v3 M7 11h.01 M11 11h.01 M15 11h.01",
+      gpu: "M3 6h18v12H3z M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M12 12h.01 M7 18v2 M17 18v2",
+      hdd: "M22 12H2 M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z M6 16h.01 M10 16h.01",
+      zap: "M13 2L3 14h9l-1 8 10-12h-9l1-8z",
+      wind: "M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2 M9.6 4.6A2 2 0 1 1 11 8H2 M12.6 19.4A2 2 0 1 0 14 16H2",
+      monitor: "M2 3h20v14H2z M8 21h8 M12 17v4",
+      keyboard: "M2 6h20v12H2z M6 10h.01 M10 10h.01 M14 10h.01 M18 10h.01 M6 14h.01 M18 14h.01 M9 14h6",
+      camera: "M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z M12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z",
+      dvr: "M2 8h20v9H2z M6 12.5h.01 M11 12.5h7",
+      phone: "M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+    };
+    function icon(d, cls) {
+      return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="' + (cls || "") + '" aria-hidden="true"><path d="' + d + '"/></svg>';
+    }
+    var STOCK_LABEL = { disponible: "En stock", poco: "Pocas piezas", agotado: "Agotado" };
+    function stockBadge(status, qty) {
+      var dot = status === "disponible" ? "dot-good" : status === "poco" ? "dot-warn" : "dot-bad";
+      var extra = (qty !== undefined && status !== "agotado") ? " · " + qty : "";
+      return '<span class="stock-badge"><span class="stock-dot ' + dot + '"></span>' + STOCK_LABEL[status] + extra + "</span>";
+    }
+    /* La foto va con respaldo: si la imagen del proveedor no carga, se
+       muestra el icono de caja en vez de un hueco roto. */
+    function imgFail(el) {
+      var s = document.createElement("span");
+      s.className = "no-photo";
+      s.innerHTML = icon(I.box);
+      el.replaceWith(s);
+    }
+    function photoImg(p, extraAttrs) {
+      var url = imgUrl(p);
+      if (!url) return '<span class="no-photo">' + icon(I.box) + "</span>";
+      return '<img src="' + esc(url) + '" alt="" loading="lazy" ' + (extraAttrs || "") + ' onerror="imgFail(this)">';
+    }
+
+    /* Disponibilidad por sucursal: Oaxaca primero y manda para vender;
+       las demás sucursales van detrás del selector "Otras sucursales". */
+    function branchAvailabilityHtml(p, compact) {
+      var branches = p.branch_stock;
+      if (!branches || !branches.length) {
+        return '<p style="margin:2px 0 0;font-size:11px;line-height:1.4;color:var(--dim)"><strong style="color:var(--text)">' +
+          esc(SETTINGS.main_branch) + ": " + p.sellable_qty + " " + (p.sellable_qty === 1 ? "pieza" : "piezas") + "</strong></p>";
+      }
+      var main = branches.filter(function (b) { return isMainBranchName(b.branch, SETTINGS.main_branch); });
+      var rest = branches.filter(function (b) { return !isMainBranchName(b.branch, SETTINGS.main_branch); });
+      var visible = main.length ? main : branches;
+      var hidden = main.length ? rest : [];
+      var mainQty = main.reduce(function (s, b) { return s + b.qty; }, 0);
+      var othersQty = rest.reduce(function (s, b) { return s + b.qty; }, 0);
+      function row(b) {
+        var isM = isMainBranchName(b.branch, SETTINGS.main_branch);
+        return '<li class="' + (isM ? "is-main" : "") + '"><span>' + esc(b.branch) + '</span><span class="q">' +
+          b.qty + " " + (b.qty === 1 ? "pieza" : "piezas") + "</span></li>";
+      }
+      var h = '<ul class="branch-list">' + visible.map(row).join("") + "</ul>";
+      if (hidden.length) {
+        h += '<div><button type="button" class="others-btn" data-others="' + p.id + '" aria-expanded="false" aria-label="Ver la disponibilidad en otras sucursales (' + hidden.length + ')">' +
+          icon(I.chevron) + '<span>Otras sucursales (' + hidden.length + ")</span></button>" +
+          '<ul class="branch-list" data-others-list="' + p.id + '" hidden>' + hidden.map(row).join("") + "</ul></div>";
+      }
+      if (mainQty === 0 && othersQty > 0) {
+        h += '<p class="avail-warning">Agotado en ' + esc(SETTINGS.main_branch) + ": hay " + othersQty + " " +
+          (othersQty === 1 ? "pieza" : "piezas") + " en otras sucursales, pero la venta se decide por " +
+          esc(SETTINGS.main_branch) + ", así que el producto se marca Agotado.</p>";
+      }
+      if (!compact) {
+        h += '<p class="avail-note">La disponibilidad de ' + esc(SETTINGS.main_branch) +
+          " es la que manda para vender; las demás sucursales están en el selector de arriba, como referencia.</p>";
+      }
+      return h;
+    }
+    function orderUrlFor(p) {
+      var msg = "Hola, me interesa este producto de " + SETTINGS.store_name + ":\n" + p.name +
+        "\nPrecio: " + fmtMXN(p.price_cents) + (SETTINGS.iva_included ? " (IVA incluido)" : " + IVA") + "\n¿Sigue disponible?";
+      return "https://wa.me/" + WA_DIGITS + "?text=" + encodeURIComponent(msg);
+    }
+    function orderButtonHtml(p, big) {
+      if (p.stock_status === "agotado") {
+        return '<button type="button" disabled class="' + (big ? "btn-agotado-big" : "btn-agotado") + '" aria-label="' + esc(p.name) + ' está agotado">Agotado</button>';
+      }
+      if (WA_DIGITS) {
+        return '<a href="' + esc(orderUrlFor(p)) + '" target="_blank" rel="noreferrer" class="silver-btn ' +
+          (big ? "btn-order-big" : "btn-order") + '" aria-label="Pedir ' + esc(p.name) + ' por WhatsApp">' +
+          icon(I.phone) + (big ? "Pedir por WhatsApp" : "Pedir") + "</a>";
+      }
+      return '<p class="' + (big ? "btn-agotado-big" : "btn-agotado") + '" style="margin-top:8px;text-align:center">Pedidos por WhatsApp muy pronto</p>';
+    }
+
+    /* ---------------- Armador de PC: categorías y sugerencias ------------ */
+    var BUILDER_CATS = [
+      { key: "procesador", label: "Procesador", hint: "El cerebro de la PC" },
+      { key: "tarjeta_madre", label: "Tarjetas Madre", hint: "Donde se conecta todo" },
+      { key: "memoria_ram", label: "Memoria RAM", hint: "Memoria de trabajo" },
+      { key: "tarjeta_grafica", label: "Tarjetas Gráficas", hint: "Video y juegos" },
+      { key: "almacenamiento", label: "Almacenamiento", hint: "SSD / disco duro" },
+      { key: "gabinete", label: "Gabinetes", hint: "La caja de la PC" },
+      { key: "fuente_poder", label: "Fuentes de Poder", hint: "La energía del equipo" },
+      { key: "enfriamiento", label: "Enfriamiento", hint: "Disipadores y líquidos" },
+      { key: "monitor", label: "Monitores", hint: "La pantalla" },
+      { key: "teclado_mouse", label: "Teclados y Mouse", hint: "Periféricos de entrada" },
+      { key: "accesorios", label: "Accesorios", hint: "Extras para tu equipo" }
+    ];
+    var BUILDER_LABEL = {};
+    BUILDER_CATS.forEach(function (c) { BUILDER_LABEL[c.key] = c.label; });
+    var BUILDER_BASE_CATS = ["procesador", "tarjeta_madre", "memoria_ram", "almacenamiento", "gabinete", "fuente_poder"];
+    var BUILDER_KEYWORDS = [
+      { cat: "procesador", words: ["procesador", "ryzen", "core i3", "core i5", "core i7", "core i9", "athlon", "cpu"] },
+      { cat: "tarjeta_madre", words: ["tarjeta madre", "motherboard", "placa madre", "mainboard"] },
+      { cat: "memoria_ram", words: ["memoria ram", "memoria ddr", "dimm", "sodimm"] },
+      { cat: "tarjeta_grafica", words: ["tarjeta gráfica", "tarjeta grafica", "tarjeta de video", "geforce", "radeon", "rtx", "gtx"] },
+      { cat: "almacenamiento", words: ["ssd", "disco duro", "disco solido", "disco sólido", "nvme", "m.2", "hdd", "unidad de estado"] },
+      { cat: "gabinete", words: ["gabinete", "case"] },
+      { cat: "fuente_poder", words: ["fuente de poder", "fuente poder", "psu"] },
+      { cat: "enfriamiento", words: ["enfriamiento", "disipador", "cooler", "ventilador", "líquido", "liquido"] },
+      { cat: "monitor", words: ["monitor", "pantalla"] },
+      { cat: "teclado_mouse", words: ["teclado", "mouse", "ratón", "raton", "kit de teclado"] }
+    ];
+    function suggestedBuilderCat(p) {
+      if (p.builder_cat) return p.builder_cat;
+      var hay = (p.name + " " + (p.category || "")).toLowerCase();
+      for (var i = 0; i < BUILDER_KEYWORDS.length; i++) {
+        var e = BUILDER_KEYWORDS[i];
+        for (var j = 0; j < e.words.length; j++) if (hay.indexOf(e.words[j]) >= 0) return e.cat;
+      }
+      return null;
+    }
+
+    /* ------------- Armador de videovigilancia: categorías ---------------- */
+    var CCTV_CATS = [
+      { key: "camara", label: "Cámaras", hint: "Interior, exterior, WiFi o cableada" },
+      { key: "grabador", label: "Grabador DVR / XVR / NVR", hint: "Donde se guarda el video" },
+      { key: "disco_duro", label: "Disco duro", hint: "Para el grabador" },
+      { key: "memoria_sd", label: "Memoria microSD", hint: "Para cámaras WiFi" },
+      { key: "conectores", label: "Conectores y baluns", hint: "BNC, video balun, RJ45, plugs" },
+      { key: "cajas", label: "Cajas con tapa", hint: "Cajas de registro y conexiones" },
+      { key: "cable", label: "Cable", hint: "UTP, coaxial o cable para cámara" },
+      { key: "fuente_cctv", label: "Fuente de poder", hint: "Energía para las cámaras" },
+      { key: "accesorios_cctv", label: "Accesorios", hint: "Extras del sistema" }
+    ];
+    var CCTV_LABEL = {};
+    CCTV_CATS.forEach(function (c) { CCTV_LABEL[c.key] = c.label; });
+    var CCTV_BASE_CATS = ["camara", "grabador"];
+    var CCTV_KEYWORDS = [
+      { cat: "fuente_cctv", words: ["fuente de poder para cámara", "fuente de poder para camara", "fuente de poder", "fuente poder", "fuente para camaras", "fuente para cámaras", "fuente cctv", "eliminador"] },
+      { cat: "grabador", words: ["dvr", "xvr", "nvr", "grabador", "videograbador"] },
+      { cat: "disco_duro", words: ["disco duro para videovigilancia", "disco duro vigilancia", "purple", "skyhawk"] },
+      { cat: "memoria_sd", words: ["microsd", "micro sd", "memoria sd", "tarjeta sd", "tf card"] },
+      { cat: "conectores", words: ["conector", "balun", "bnc", "rj45", "transceptor"] },
+      { cat: "cajas", words: ["caja con tapa", "caja de registro", "caja de conexiones", "caja estanca", "gabinete para conexiones"] },
+      { cat: "cable", words: ["cable utp", "bobina", "cable coaxial", "cable para cámara", "cable para camara"] },
+      { cat: "camara", words: ["cámara", "camara", "camera", "ptz", "ojo de pez"] },
+      { cat: "accesorios_cctv", words: ["videovigilancia", "cctv", "kit de cámaras", "kit de camaras"] }
+    ];
+    var CCTV_CAMERA_FORM_WORDS = ["bala", "bullet", "domo"];
+    function suggestedCctvCat(p) {
+      if (p.cctv_cat) return p.cctv_cat;
+      var hay = (p.name + " " + (p.category || "")).toLowerCase();
+      var isPowerSupply = hay.indexOf("fuente de poder") >= 0 || hay.indexOf("fuente poder") >= 0 ||
+        hay.indexOf("eliminador") >= 0 || /\bpsu\b/.test(hay);
+      if (isPowerSupply) {
+        var hints = ["cámara", "camara", "cctv", "videovigilancia", "vigilancia", "12v", "eliminador"];
+        for (var h = 0; h < hints.length; h++) if (hay.indexOf(hints[h]) >= 0) return "fuente_cctv";
+        return null;
+      }
+      for (var i = 0; i < CCTV_KEYWORDS.length; i++) {
+        var e = CCTV_KEYWORDS[i];
+        for (var j = 0; j < e.words.length; j++) if (hay.indexOf(e.words[j]) >= 0) return e.cat;
+        if (e.cat === "camara") {
+          var padded = " " + hay.replace(/[^a-záéíóúüñ0-9]+/g, " ") + " ";
+          for (var k = 0; k < CCTV_CAMERA_FORM_WORDS.length; k++) {
+            if (padded.indexOf(" " + CCTV_CAMERA_FORM_WORDS[k] + " ") >= 0) return "camara";
+          }
+        }
+      }
+      return null;
+    }
+    function isWifiCamera(p) {
+      var t = productTechText(p).toLowerCase();
+      return t.indexOf("wifi") >= 0 || t.indexOf("wi-fi") >= 0 || t.indexOf("inalámbric") >= 0 || t.indexOf("inalambric") >= 0 || t.indexOf("wireless") >= 0;
+    }
+    function isIpCamera(p) {
+      var t = productTechText(p).toLowerCase();
+      return /\bip\b/.test(t) || t.indexOf("poe") >= 0 || t.indexOf("onvif") >= 0;
+    }
+    function recorderType(p) {
+      var t = productTechText(p).toUpperCase();
+      if (/\bNVR\b/.test(t)) return "NVR";
+      if (/\bXVR\b/.test(t)) return "XVR";
+      if (/\bDVR\b/.test(t)) return "DVR";
+      return null;
+    }
+
+    /* ------------------------- Secciones de la tienda -------------------- */
+    var SECTION_GROUP_LABEL = { computo: "Cómputo y componentes", cctv: "Videovigilancia", mas: "Más" };
+    var STORE_SECTIONS = [
+      { key: "laptops", label: "Laptops y Computadoras", group: "computo", icon: I.laptop },
+      { key: "procesador", label: "Procesadores", group: "computo", icon: I.cpu },
+      { key: "tarjeta_madre", label: "Tarjetas Madre", group: "computo", icon: I.board },
+      { key: "memoria_ram", label: "Memorias RAM", group: "computo", icon: I.ram },
+      { key: "tarjeta_grafica", label: "Tarjetas Gráficas", group: "computo", icon: I.gpu },
+      { key: "almacenamiento", label: "Almacenamiento", group: "computo", icon: I.hdd },
+      { key: "gabinete", label: "Gabinetes", group: "computo", icon: I.box },
+      { key: "fuente_poder", label: "Fuentes de Poder", group: "computo", icon: I.zap },
+      { key: "enfriamiento", label: "Enfriamiento", group: "computo", icon: I.wind },
+      { key: "monitor", label: "Monitores", group: "computo", icon: I.monitor },
+      { key: "teclado_mouse", label: "Teclados y Mouse", group: "computo", icon: I.keyboard },
+      { key: "accesorios", label: "Accesorios", group: "computo", icon: I.wrench },
+      { key: "cctv_kits", label: "Kits de Videovigilancia", group: "cctv", icon: I.video },
+      { key: "camaras", label: "Cámaras", group: "cctv", icon: I.camera },
+      { key: "grabadores", label: "Grabadores DVR / XVR / NVR", group: "cctv", icon: I.dvr },
+      { key: "cctv_discos", label: "Discos Duros y Memorias SD", group: "cctv", icon: I.hdd },
+      { key: "cctv_instalacion", label: "Conectores, Cajas y Cable", group: "cctv", icon: I.wrench },
+      { key: "cctv_accesorios", label: "Accesorios de Videovigilancia", group: "cctv", icon: I.shield },
+      { key: "otros", label: "Otros Productos", group: "mas", icon: I.box }
+    ];
+    var SECTION_LABEL = {};
+    STORE_SECTIONS.forEach(function (s) { SECTION_LABEL[s.key] = s.label; });
+    function cctvSectionFor(cat) {
+      switch (cat) {
+        case "camara": return "camaras";
+        case "grabador": return "grabadores";
+        case "disco_duro": case "memoria_sd": return "cctv_discos";
+        case "conectores": case "cajas": case "cable": case "fuente_cctv": return "cctv_instalacion";
+        case "accesorios_cctv": return "cctv_accesorios";
+      }
+      return "otros";
+    }
+    var COMPLETE_PC_NAME = /^(laptop|notebook|computadora|pc\b|all in one|imac|mini pc)|computadora portátil|computadora portatil|computadora gamer|pc gamer|pc de escritorio/;
+    function storeSectionFor(p) {
+      var cat = (p.category || "").trim().toLowerCase();
+      if (cat) {
+        if (cat.indexOf("laptop") >= 0 || cat.indexOf("computadora") >= 0 || cat.indexOf("notebook") >= 0) return "laptops";
+        if (cat.indexOf("gabinete") >= 0) return "gabinete";
+        if (cat.indexOf("monitor") >= 0) return "monitor";
+        if (cat.indexOf("memoria") >= 0 || cat.indexOf("ram") >= 0) return "memoria_ram";
+        if (cat.indexOf("procesador") >= 0) return "procesador";
+        if (cat.indexOf("madre") >= 0 || cat.indexOf("motherboard") >= 0) return "tarjeta_madre";
+      }
+      var name = p.name.toLowerCase();
+      var isCctvKit = (name.indexOf("kit") >= 0 || (name.indexOf("sistema") >= 0 && name.indexOf("seguridad") >= 0)) &&
+        (name.indexOf("videovigilancia") >= 0 || name.indexOf("cámara") >= 0 || name.indexOf("camara") >= 0 ||
+          /\b(dvr|xvr|nvr|nvs)\b/.test(name) || name.indexOf("turbohd") >= 0 || name.indexOf("hdcvi") >= 0 ||
+          name.indexOf("seguridad") >= 0 || name.indexOf("colorvu") >= 0);
+      if (isCctvKit) return "cctv_kits";
+      if (p.cctv_cat) return cctvSectionFor(p.cctv_cat);
+      if (p.builder_cat) return p.builder_cat;
+      var sku = (p.sku || "").toUpperCase();
+      if (/^(COM|CPU|AIO|WKS)/.test(sku)) return "laptops";
+      if (COMPLETE_PC_NAME.test(name)) return "laptops";
+      var cc = suggestedCctvCat(p);
+      if (cc) return cctvSectionFor(cc);
+      var bc = suggestedBuilderCat(p);
+      if (bc) return bc;
+      return "otros";
+    }
+    var SECTION_OF = {};
+    var SECTION_COUNTS = {};
+    PRODUCTS.forEach(function (p) {
+      var s = storeSectionFor(p);
+      SECTION_OF[p.id] = s;
+      SECTION_COUNTS[s] = (SECTION_COUNTS[s] || 0) + 1;
+    });
+    var SECTIONS_PRESENT = STORE_SECTIONS.filter(function (s) { return (SECTION_COUNTS[s.key] || 0) > 0; });
+
+    /* ------------------------------ Estado ------------------------------- */
+    var state = {
+      view: "tienda",           /* tienda | producto | pc | cctv */
+      query: "",
+      section: null,
+      sectionMenuOpen: false,
+      shown: 48,
+      selectedId: null,
+      pcSel: {},                /* cat -> productId */
+      pcWarranty: "no",
+      pcOpenCat: null,
+      pcShown: {},              /* cat -> cuántos candidatos se muestran */
+      cctvSel: {},              /* cat -> productId */
+      cctvQty: {},              /* cat -> cantidad */
+      cctvOpenCat: null,
+      cctvShown: {}
+    };
+    var CAND_PAGE = 40;
+
+    var elTienda = document.getElementById("viewTienda");
+    var elProducto = document.getElementById("viewProducto");
+    var elPc = document.getElementById("viewPc");
+    var elCctv = document.getElementById("viewCctv");
+    document.getElementById("storeName").textContent = SETTINGS.store_name;
+
+    function showView() {
+      elTienda.hidden = state.view !== "tienda";
+      elProducto.hidden = state.view !== "producto";
+      elPc.hidden = state.view !== "pc";
+      elCctv.hidden = state.view !== "cctv";
+      document.getElementById("navTienda").setAttribute("aria-pressed", state.view === "tienda" || state.view === "producto" ? "true" : "false");
+      document.getElementById("navPc").setAttribute("aria-pressed", state.view === "pc" ? "true" : "false");
+      document.getElementById("navCctv").setAttribute("aria-pressed", state.view === "cctv" ? "true" : "false");
+    }
+    function go(view) {
+      state.view = view;
+      if (view === "tienda") renderTienda();
+      if (view === "producto") renderProducto();
+      if (view === "pc") renderPc();
+      if (view === "cctv") renderCctv();
+      showView();
+      window.scrollTo({ top: 0 });
+    }
+    function openProduct(id) { state.selectedId = id; go("producto"); }
+
+    /* ----------------------------- Vitrina ------------------------------- */
+    function visibleProducts() {
+      var q = state.query.trim().toLowerCase();
+      return PRODUCTS.filter(function (p) {
+        if (q) {
+          return p.name.toLowerCase().indexOf(q) >= 0 || (p.sku || "").toLowerCase().indexOf(q) >= 0;
+        }
+        if (state.section && SECTION_OF[p.id] !== state.section) return false;
+        return true;
+      });
+    }
+    function eyebrowFor(p) {
+      var s = SECTION_OF[p.id];
+      if (s && s !== "otros") return SECTION_LABEL[s];
+      return p.category || "CT Online";
+    }
+    function cardHtml(p) {
+      var url = imgUrl(p);
+      var photo = url
+        ? '<img src="' + esc(url) + '" alt="" loading="lazy" onerror="imgFail(this)">'
+        : '<span class="no-photo">' + icon(I.box) + "</span>";
+      return '<article class="card">' +
+        '<button type="button" class="card-photo" data-open="' + p.id + '" aria-label="Ver la ficha de ' + esc(p.name) + '">' + photo + "</button>" +
+        '<div class="card-body">' +
+          '<p class="card-eyebrow">' + esc(eyebrowFor(p)) + "</p>" +
+          '<h3 class="card-name"><button type="button" data-open="' + p.id + '" aria-label="Ver la ficha de ' + esc(p.name) + '">' + esc(p.name) + "</button></h3>" +
+          "<div>" + stockBadge(p.stock_status, p.sellable_qty) + "</div>" +
+          '<div><p class="avail-label">DISPONIBILIDAD</p>' + branchAvailabilityHtml(p, true) + "</div>" +
+          '<p class="card-price price-num silver-text">' + fmtMXN(p.price_cents) + "</p>" +
+          '<p class="card-iva">' + (SETTINGS.iva_included ? "IVA incluido" : "Más IVA") + "</p>" +
+          orderButtonHtml(p, false) +
+          '<button type="button" class="ficha-link" data-open="' + p.id + '" aria-label="Ver la ficha completa de ' + esc(p.name) + '">Ver ficha completa</button>' +
+        "</div></article>";
+    }
+    function sectionOptionHtml(key, ic, label, count) {
+      var selected = state.section === key;
+      return '<button type="button" role="option" aria-selected="' + selected + '" data-section-option="' + (key || "") + '" class="section-option">' +
+        '<span class="sec-ico">' + icon(ic) + "</span>" +
+        '<span class="sec-name">' + esc(label) + ' <span class="sec-count">· ' + count + " " + (count === 1 ? "producto" : "productos") + "</span></span>" +
+        (selected ? icon(I.check, "check") : "") + "</button>";
+    }
+    function renderTienda() {
+      var q = state.query.trim().toLowerCase();
+      var visible = visibleProducts();
+      var pageItems = visible.slice(0, state.shown);
+      var activeSection = state.section ? STORE_SECTIONS.find(function (s) { return s.key === state.section; }) : null;
+      if (activeSection && (SECTION_COUNTS[activeSection.key] || 0) === 0) activeSection = null;
+      var triggerCount = activeSection ? (SECTION_COUNTS[activeSection.key] || 0) : PRODUCTS.length;
+      var h = "";
+      h += '<div class="search-box">' + icon(I.search) +
+        '<input class="input" id="searchInput" value="' + esc(state.query) + '" placeholder="Buscar productos…" aria-label="Buscar productos"></div>';
+      h += '<p class="snapshot-note">Precios y disponibilidad de esta copia: ' + SNAPSHOT_LABEL + ".</p>";
+      /* Selector de secciones */
+      h += '<span class="section-label font-display" id="sectionLabel">Sección</span>';
+      h += '<div class="section-menu-wrap" id="sectionWrap">';
+      h += '<button type="button" class="input section-trigger" id="sectionTrigger" aria-haspopup="listbox" aria-expanded="' + state.sectionMenuOpen + '" aria-label="Elegir la sección de la tienda">' +
+        '<span class="sec-ico">' + icon(activeSection ? activeSection.icon : I.grid) + "</span>" +
+        '<span class="sec-name">' + esc(activeSection ? activeSection.label : "Todas las secciones") +
+        ' <span class="sec-count">· ' + triggerCount + " " + (triggerCount === 1 ? "producto" : "productos") + "</span></span>" +
+        icon(I.chevron, "chev" + (state.sectionMenuOpen ? " open" : "")) + "</button>";
+      if (state.sectionMenuOpen) {
+        h += '<div class="section-menu" role="listbox" aria-label="Secciones de la tienda" id="sectionMenu">';
+        h += sectionOptionHtml(null, I.grid, "Todas las secciones", PRODUCTS.length);
+        ["computo", "cctv", "mas"].forEach(function (g) {
+          var opts = SECTIONS_PRESENT.filter(function (s) { return s.group === g; });
+          if (!opts.length) return;
+          h += '<p class="section-group-label">' + SECTION_GROUP_LABEL[g] + "</p>";
+          opts.forEach(function (s) { h += sectionOptionHtml(s.key, s.icon, s.label, SECTION_COUNTS[s.key] || 0); });
+        });
+        h += "</div>";
+      }
+      h += "</div>";
+      h += '<p class="section-help">' + (state.section
+        ? "Estás viendo solo esta sección; la búsqueda busca en toda la tienda."
+        : PRODUCTS.length + " productos en la tienda · elige una sección para ver solo sus productos.") + "</p>";
+      /* Entradas a los armadores */
+      h += '<button type="button" class="builder-entry" id="entryPc" aria-label="Abrir el armador de PC para armar una computadora por componentes">' +
+        '<span class="be-ico">' + icon(I.cpu) + '</span><span class="be-text"><span class="be-title font-display">Arma tu PC</span>' +
+        '<span class="be-sub">Elige procesador, tarjeta madre, memoria y más: el total se calcula solo y pides todo junto.</span></span>' +
+        icon(I.back, "arrow") + "</button>";
+      h += '<button type="button" class="builder-entry" id="entryCctv" aria-label="Abrir el armador de videovigilancia para armar un sistema de cámaras">' +
+        '<span class="be-ico">' + icon(I.video) + '</span><span class="be-text"><span class="be-title font-display">Arma tu sistema de videovigilancia</span>' +
+        '<span class="be-sub">Elige cámaras, grabador DVR/XVR/NVR, disco duro, memoria, conectores y cajas: el total se calcula solo.</span></span>' +
+        icon(I.back, "arrow") + "</button>";
+      /* Encabezado de resultados */
+      if (q) {
+        h += '<p class="results-note" role="status">Resultados para <strong>“' + esc(state.query.trim()) + '”</strong> en toda la tienda: <strong>' +
+          visible.length + "</strong> " + (visible.length === 1 ? "producto" : "productos") + ".</p>";
+      } else if (activeSection) {
+        var withStock = visible.filter(function (p) { return p.stock_status !== "agotado"; }).length;
+        h += '<div class="section-heading"><h2 class="font-display">' + esc(activeSection.label) + '</h2><span>' +
+          visible.length + " " + (visible.length === 1 ? "producto" : "productos") + " · " + withStock + " con piezas en " +
+          esc(SETTINGS.main_branch) + "</span></div>";
+      }
+      /* Lista */
+      if (PRODUCTS.length === 0) {
+        h += '<p class="empty-note">Estamos preparando el catálogo. Vuelve muy pronto.</p>';
+      } else if (visible.length === 0) {
+        h += '<p class="empty-note">' + (q ? "Ningún producto coincide con tu búsqueda." : "Esta sección todavía no tiene productos.") + "</p>";
+      } else {
+        h += '<div class="grid-products">' + pageItems.map(cardHtml).join("") + "</div>";
+        h += '<div class="list-status"><p role="status">Mostrando ' + pageItems.length + " de " + visible.length + " " +
+          (visible.length === 1 ? "producto" : "productos") +
+          (q ? " que coinciden con tu búsqueda" : activeSection ? " en " + esc(activeSection.label) : " en toda la tienda") + "</p>";
+        if (visible.length > state.shown) {
+          h += '<button type="button" class="btn-ghost" id="showMore" aria-label="Mostrar más productos (quedan ' + (visible.length - state.shown) + ')">Mostrar más productos (' + (visible.length - state.shown) + " más)</button>";
+        }
+        h += "</div>";
+      }
+      elTienda.innerHTML = h;
+      bindTienda();
+    }
+    function bindTienda() {
+      var input = document.getElementById("searchInput");
+      if (input) {
+        input.addEventListener("input", function () {
+          var pos = input.selectionStart;
+          state.query = input.value;
+          state.shown = 48;
+          renderTienda();
+          var ni = document.getElementById("searchInput");
+          if (ni) { ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} }
+        });
+      }
+      var trigger = document.getElementById("sectionTrigger");
+      if (trigger) {
+        trigger.addEventListener("click", function () {
+          state.sectionMenuOpen = !state.sectionMenuOpen;
+          renderTienda();
+        });
+      }
+      elTienda.querySelectorAll("[data-section-option]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var k = btn.getAttribute("data-section-option");
+          state.section = k ? k : null;
+          state.sectionMenuOpen = false;
+          state.shown = 48;
+          renderTienda();
+          var t = document.getElementById("sectionTrigger");
+          if (t) t.focus();
+        });
+      });
+      var ep = document.getElementById("entryPc");
+      if (ep) ep.addEventListener("click", function () { go("pc"); });
+      var ec = document.getElementById("entryCctv");
+      if (ec) ec.addEventListener("click", function () { go("cctv"); });
+      var sm = document.getElementById("showMore");
+      if (sm) sm.addEventListener("click", function () { state.shown += 48; renderTienda(); });
+      bindCommon(elTienda);
+    }
+    /* Clics compartidos: abrir ficha y desplegar "Otras sucursales" */
+    function bindCommon(root) {
+      root.querySelectorAll("[data-open]").forEach(function (el) {
+        el.addEventListener("click", function () { openProduct(Number(el.getAttribute("data-open"))); });
+      });
+      root.querySelectorAll("[data-others]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var id = btn.getAttribute("data-others");
+          var list = root.querySelector('[data-others-list="' + id + '"]');
+          if (!list) return;
+          var open = list.hidden;
+          list.hidden = !open;
+          btn.setAttribute("aria-expanded", String(open));
+          btn.setAttribute("aria-label", open ? "Ocultar la disponibilidad en otras sucursales" : "Ver la disponibilidad en otras sucursales");
+          var svg = btn.querySelector("svg");
+          if (svg) svg.classList.toggle("open", open);
+          var span = btn.querySelector("span");
+          if (span) {
+            span.textContent = open
+              ? "Ocultar otras sucursales"
+              : "Otras sucursales (" + list.querySelectorAll("li").length + ")";
+          }
+        });
+      });
+    }
+    document.addEventListener("pointerdown", function (e) {
+      if (!state.sectionMenuOpen) return;
+      var wrap = document.getElementById("sectionWrap");
+      if (wrap && !wrap.contains(e.target)) { state.sectionMenuOpen = false; renderTienda(); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && state.sectionMenuOpen) {
+        state.sectionMenuOpen = false;
+        renderTienda();
+        var t = document.getElementById("sectionTrigger");
+        if (t) t.focus();
+      }
+    });
+
+    /* --------------------------- Ficha de producto ------------------------ */
+    function renderProducto() {
+      var p = BY_ID[state.selectedId];
+      if (!p) { go("tienda"); return; }
+      var specs = specsFromName(p.name);
+      var builderCat = suggestedBuilderCat(p);
+      var cctvCat = suggestedCctvCat(p);
+      var sectionKey = SECTION_OF[p.id];
+      var agotado = p.stock_status === "agotado";
+      var url = imgUrl(p);
+      var related = PRODUCTS.filter(function (x) { return x.id !== p.id && SECTION_OF[x.id] === sectionKey; }).slice(0, 4);
+      var h = "";
+      h += '<div class="pp-top"><button type="button" class="btn-ghost" id="ppBack" aria-label="Volver a la lista de productos">' +
+        icon(I.back) + "Volver a la tienda</button>" +
+        '<span class="pp-badge">' + esc(SECTION_LABEL[sectionKey].toUpperCase()) + "</span>";
+      if (p.category) h += '<span class="pp-cat">' + esc(p.category) + "</span>";
+      if (builderCat) h += '<span class="pp-badge alt">' + esc(BUILDER_LABEL[builderCat].toUpperCase()) + "</span>";
+      if (cctvCat) h += '<span class="pp-badge alt">' + esc(CCTV_LABEL[cctvCat].toUpperCase()) + " · VIDEOVIGILANCIA</span>";
+      h += "</div>";
+      h += '<div class="pp-grid"><div><div class="pp-photo">' +
+        (url ? '<img src="' + esc(url) + '" alt="' + esc(p.name) + '" onerror="imgFail(this)">' : '<span class="no-photo">' + icon(I.box) + "</span>") +
+        "</div></div><div>";
+      h += '<p class="pp-sku">CT Online' + (p.sku ? " · Clave " + esc(p.sku) : "") + "</p>";
+      h += '<h2 class="pp-title font-display">' + esc(p.name) + "</h2>";
+      h += '<div class="pp-stockline">' + stockBadge(p.stock_status, p.sellable_qty) +
+        '<span class="txt">' + (agotado ? "Sin existencias ahorita" : p.stock_status === "poco" ? "¡Date prisa, quedan pocas!" : "Hay existencias") + "</span></div>";
+      if (specs.length) {
+        h += '<div class="pp-specs"><h3 class="font-display">Características principales</h3><ul>' +
+          specs.map(function (s) { return "<li>" + icon(I.check) + "<span>" + esc(s) + "</span></li>"; }).join("") + "</ul></div>";
+      }
+      var cardC = cardPriceCents(p.price_cents);
+      h += '<div class="price-box"><div class="price-row"><div><p class="pl">TRANSFERENCIA O DEPÓSITO BANCARIO</p><p class="ps">' +
+        (SETTINGS.iva_included ? "IVA incluido" : "Más IVA") + '</p></div><p class="pv-big price-num silver-text">' + fmtMXN(p.price_cents) + "</p></div>" +
+        '<div class="price-row alt"><div class="card-ico">' + icon(I.card) + '<div><p class="pl">TARJETA DE CRÉDITO O DÉBITO</p>' +
+        (SETTINGS.card_surcharge_pct > 0 ? '<p class="ps">+' + SETTINGS.card_surcharge_pct + "% por pago con tarjeta</p>" : "") +
+        '</div></div><p class="pv-card price-num">' + fmtMXN(cardC) + "</p></div></div>";
+      h += '<div style="margin-top:16px"><p class="avail-label">DISPONIBILIDAD</p><div style="margin-top:6px">' +
+        branchAvailabilityHtml(p, false) + "</div></div>";
+      h += '<div class="pp-actions">' + orderButtonHtml(p, true);
+      if (builderCat) {
+        h += '<button type="button" class="btn-ghost" id="ppAddPc" aria-label="Agregar ' + esc(p.name) + ' a mi PC en el armador">' +
+          icon(I.wrench) + "Agregar a mi PC en «Arma tu PC»</button>";
+      }
+      if (cctvCat) {
+        h += '<button type="button" class="btn-ghost" id="ppAddCctv" aria-label="Agregar ' + esc(p.name) + ' a mi sistema de videovigilancia">' +
+          icon(I.video) + "Agregar a mi sistema en «Arma tu sistema de videovigilancia»</button>";
+      }
+      h += "</div></div></div>";
+      if (p.tech_specs.length) {
+        h += '<section class="pp-section" aria-label="Ficha técnica del producto"><h3 class="pp-h3-lg font-display">Ficha técnica</h3>' +
+          '<div class="ficha-table-wrap"><table class="ficha"><tbody>' +
+          p.tech_specs.map(function (t) {
+            return '<tr><th scope="row">' + esc(t.label) + "</th><td>" + esc(t.value) + "</td></tr>";
+          }).join("") + "</tbody></table></div></section>";
+      }
+      if (related.length) {
+        h += '<section class="pp-section" aria-label="Productos relacionados"><h3 class="pp-h3-lg font-display">También te puede interesar</h3><div class="related-grid">' +
+          related.map(function (r) {
+            var ru = imgUrl(r);
+            return '<button type="button" class="related-card" data-open="' + r.id + '" aria-label="Ver la ficha de ' + esc(r.name) + '">' +
+              '<span class="rc-photo">' + (ru ? '<img src="' + esc(ru) + '" alt="" loading="lazy" onerror="imgFail(this)">' : '<span class="no-photo">' + icon(I.box) + "</span>") + "</span>" +
+              '<span class="rc-body"><span class="rc-name">' + esc(r.name) + '</span>' +
+              '<span class="rc-price price-num silver-text">' + fmtMXN(r.price_cents) + "</span></span></button>";
+          }).join("") + "</div></section>";
+      }
+      elProducto.innerHTML = h;
+      var back = document.getElementById("ppBack");
+      if (back) back.addEventListener("click", function () { go("tienda"); });
+      var ap = document.getElementById("ppAddPc");
+      if (ap && builderCat) ap.addEventListener("click", function () {
+        state.pcSel[builderCat] = p.id; go("pc");
+      });
+      var ac = document.getElementById("ppAddCctv");
+      if (ac && cctvCat) ac.addEventListener("click", function () {
+        state.cctvSel[cctvCat] = p.id;
+        if (!state.cctvQty[cctvCat]) state.cctvQty[cctvCat] = 1;
+        go("cctv");
+      });
+      bindCommon(elProducto);
+    }
+
+    /* ------------------------- Candidatos (armadores) --------------------- */
+    function candTier(p) { return p.sellable_qty > 0 ? 0 : p.other_branches_qty > 0 ? 1 : 2; }
+    function pcCandidates(cat) {
+      return PRODUCTS.filter(function (p) { return suggestedBuilderCat(p) === cat; }).sort(function (a, b) {
+        var ae = a.builder_cat === cat ? 0 : 1, be = b.builder_cat === cat ? 0 : 1;
+        if (ae !== be) return ae - be;
+        var at = candTier(a), bt = candTier(b);
+        if (at !== bt) return at - bt;
+        return a.price_cents - b.price_cents;
+      });
+    }
+    function cctvCandidates(cat) {
+      return PRODUCTS.filter(function (p) { return suggestedCctvCat(p) === cat; }).sort(function (a, b) {
+        var ae = a.cctv_cat === cat ? 0 : 1, be = b.cctv_cat === cat ? 0 : 1;
+        if (ae !== be) return ae - be;
+        var at = candTier(a), bt = candTier(b);
+        if (at !== bt) return at - bt;
+        return a.price_cents - b.price_cents;
+      });
+    }
+    function thumbHtml(p, cls) {
+      var url = imgUrl(p);
+      return '<span class="' + cls + '">' + (url ? '<img src="' + esc(url) + '" alt="" loading="lazy" onerror="imgFail(this)">' : '<span class="no-photo">' + icon(I.box) + "</span>") + "</span>";
+    }
+    function selRowHtml(p, builderKind) {
+      var otherOnly = builderOtherBranchOnly(p);
+      var h = '<div class="sel-row">' +
+        '<button type="button" class="sel-thumb" data-open="' + p.id + '" aria-label="Ver la ficha de ' + esc(p.name) + '">' +
+        (imgUrl(p) ? '<img src="' + esc(imgUrl(p)) + '" alt="" onerror="imgFail(this)">' : '<span class="no-photo">' + icon(I.box) + "</span>") + "</button>" +
+        '<div class="sel-info"><p class="sel-name">' + esc(p.name) + '</p><div class="sel-meta">' +
+        '<span class="sel-price price-num silver-text">' + fmtMXN(p.price_cents) + "</span>" +
+        stockBadge(p.stock_status, p.sellable_qty);
+      if (otherOnly) {
+        var s = otherBranchSummary(p);
+        h += '<span class="other-note">Sin piezas en ' + esc(SETTINGS.main_branch) + ": se pide de otra sucursal" + (s ? " (" + esc(s) + ")" : "") + "</span>";
+      }
+      h += "</div></div></div>";
+      return h;
+    }
+
+    /* ------------------------------ Arma tu PC ---------------------------- */
+    function pcChosenOf(cat) {
+      var id = state.pcSel[cat];
+      return id !== undefined ? BY_ID[id] : undefined;
+    }
+    function pcIncompatReason(cat, p, cpuSel, mbSel, ramSel) {
+      if (cat === "tarjeta_madre" && cpuSel && cpuSel.id !== p.id) {
+        var a1 = productSocket(cpuSel), b1 = productSocket(p);
+        if (a1 && b1 && a1 !== b1) return "Socket " + b1 + ": tu procesador es " + a1;
+      }
+      if (cat === "procesador" && mbSel && mbSel.id !== p.id) {
+        var a2 = productSocket(mbSel), b2 = productSocket(p);
+        if (a2 && b2 && a2 !== b2) return "Socket " + b2 + ": tu tarjeta madre es " + a2;
+      }
+      if (cat === "memoria_ram" && mbSel) {
+        var a3 = productRamType(mbSel), b3 = productRamType(p);
+        if (a3 && b3 && a3 !== b3) return b3 + ": tu tarjeta madre usa " + a3;
+      }
+      if (cat === "tarjeta_madre" && ramSel) {
+        var a4 = productRamType(ramSel), b4 = productRamType(p);
+        if (a4 && b4 && a4 !== b4) return "Usa " + b4 + ": tu memoria es " + a4;
+      }
+      return null;
+    }
+    function renderPc() {
+      var cpuSel = pcChosenOf("procesador"), mbSel = pcChosenOf("tarjeta_madre"), ramSel = pcChosenOf("memoria_ram");
+      var chosen = [];
+      BUILDER_CATS.forEach(function (c) {
+        var p = pcChosenOf(c.key);
+        if (p) chosen.push({ cat: c.key, label: c.label, product: p });
+      });
+      var conflicts = [];
+      if (cpuSel && mbSel) {
+        var sa = productSocket(cpuSel), sb = productSocket(mbSel);
+        if (sa && sb && sa !== sb) conflicts.push("El procesador es socket " + sa + " y la tarjeta madre es " + sb + ": no son compatibles, cambia uno de los dos.");
+      }
+      if (mbSel && ramSel) {
+        var ra = productRamType(mbSel), rb = productRamType(ramSel);
+        if (ra && rb && ra !== rb) conflicts.push("La tarjeta madre usa memoria " + ra + " y elegiste RAM " + rb + ": no son compatibles, cambia una de las dos.");
+      }
+      var socketVerified = cpuSel && mbSel && productSocket(cpuSel) !== null && productSocket(cpuSel) === productSocket(mbSel);
+      var partsTotal = chosen.reduce(function (s, c) { return s + c.product.price_cents; }, 0);
+      var missingBase = BUILDER_BASE_CATS.filter(function (k) { return state.pcSel[k] === undefined || !BY_ID[state.pcSel[k]]; });
+      var warrantyPct = state.pcWarranty === "nueva" ? SETTINGS.warranty_pct_new : state.pcWarranty === "existente" ? SETTINGS.warranty_pct_existing : 0;
+      var warrantyFee = Math.round(partsTotal * warrantyPct / 100);
+      var total = partsTotal + warrantyFee;
+      var anyCandidates = BUILDER_CATS.some(function (c) { return pcCandidates(c.key).length > 0; });
+
+      var h = "";
+      h += '<div class="builder-head"><span class="bh-ico">' + icon(I.cpu) + '</span><div><h2 class="font-display">Arma tu PC</h2>' +
+        "<p>Elige un componente de cada categoría y el total se calcula solo, con los precios y la Disponibilidad de esta tienda. " +
+        "Conforme eliges, el armador te muestra solo lo compatible con tu selección (socket del procesador y tipo de memoria, según el nombre de cada producto) y bloquea lo que no combina. " +
+        "Si una pieza no tiene disponibilidad en " + esc(SETTINGS.main_branch) + " pero sí en otra sucursal, también la puedes elegir: se pide de esa sucursal. Al final pides todo junto por WhatsApp.</p></div></div>";
+      h += '<p class="builder-progress">' + chosen.length + " de " + BUILDER_CATS.length + " componentes elegidos";
+      if (missingBase.length === 0 && chosen.length > 0) h += ' <span class="ok">· Base completa: tu PC ya puede funcionar</span>';
+      else if (chosen.length > 0) h += ' <span class="warn">· Para que funcione faltan: ' + missingBase.map(function (k) { return BUILDER_LABEL[k]; }).join(", ") + "</span>";
+      h += "</p>";
+      if (!anyCandidates) {
+        h += '<div class="builder-empty">' + icon(I.cpu) + '<p class="t font-display">El armador todavía no tiene componentes</p>' +
+          '<p class="s">Muy pronto vas a poder armar tu PC aquí con los componentes de la tienda.</p></div>';
+        elPc.innerHTML = h;
+        return;
+      }
+      h += '<div class="builder-steps">';
+      BUILDER_CATS.forEach(function (c) {
+        var candidates = pcCandidates(c.key);
+        var selId = state.pcSel[c.key];
+        var sel = selId !== undefined ? BY_ID[selId] : undefined;
+        var isOpen = state.pcOpenCat === c.key;
+        var shownCount = state.pcShown[c.key] || CAND_PAGE;
+        h += '<section class="step" aria-label="Componente: ' + esc(c.label) + '"><div class="step-head"><h3 class="font-display">' + esc(c.label) +
+          (BUILDER_BASE_CATS.indexOf(c.key) >= 0 ? '<span class="base-tag">BASE</span>' : "") + '</h3><span class="step-hint">' + esc(c.hint) + "</span></div>";
+        if (sel) {
+          h += selRowHtml(sel, "pc");
+          h += '<div class="qty-row" style="margin-top:8px"><button type="button" class="btn-ghost" data-pc-change="' + c.key + '" aria-label="Cambiar el componente de ' + esc(c.label) + '" aria-expanded="' + isOpen + '">Cambiar</button>' +
+            '<button type="button" class="btn-remove" data-pc-remove="' + c.key + '" aria-label="Quitar el componente de ' + esc(c.label) + ' de mi PC">Quitar</button></div>';
+        } else if (candidates.length > 0) {
+          h += '<button type="button" class="btn-primary silver-btn step-pick" data-pc-change="' + c.key + '" aria-label="Elegir un componente de ' + esc(c.label) + '" aria-expanded="' + isOpen + '">' +
+            icon(I.plus) + "Elegir " + esc(c.label.toLowerCase()) + "</button>";
+        } else {
+          h += '<p class="step-empty">Todavía no hay productos de esta categoría en la tienda.</p>';
+        }
+        if (isOpen && candidates.length > 0) {
+          var page = candidates.slice(0, shownCount);
+          h += '<ul class="cand-list">';
+          page.forEach(function (p) {
+            var isSel = selId === p.id;
+            var out = !builderHasStock(p);
+            var otherOnly = builderOtherBranchOnly(p);
+            var incompat = isSel ? null : pcIncompatReason(c.key, p, cpuSel, mbSel, ramSel);
+            var blocked = out || incompat !== null;
+            var sock = productSocket(p), ramT = productRamType(p);
+            var techChip = null;
+            if (c.key === "procesador" || c.key === "tarjeta_madre") {
+              techChip = sock ? "Socket " + sock : (c.key === "tarjeta_madre" && ramT ? "Memoria " + ramT : null);
+            } else if (c.key === "memoria_ram" && ramT) techChip = ramT;
+            var aria = out ? p.name + " está agotado en todas las sucursales"
+              : incompat ? p.name + " no es compatible: " + incompat
+              : otherOnly ? p.name + ": sin piezas en " + SETTINGS.main_branch + ", disponible en otra sucursal. Elegir como " + c.label
+              : "Elegir " + p.name + " como " + c.label;
+            h += '<li><button type="button" class="cand' + (isSel ? " is-sel" : "") + '" data-pc-pick="' + c.key + ":" + p.id + '"' +
+              (blocked ? " disabled" : "") + ' aria-label="' + esc(aria) + '">' +
+              thumbHtml(p, "cand-thumb") + '<span class="cand-info"><span class="cand-name">' + esc(p.name) + '</span>' +
+              '<span class="cand-meta"><span class="cand-price price-num silver-text">' + fmtMXN(p.price_cents) + "</span>" +
+              (otherOnly ? '<span class="chip-outline">OTRA SUCURSAL</span>' : stockBadge(p.stock_status)) +
+              (techChip ? '<span class="chip">' + esc(techChip) + "</span>" : "") +
+              (p.builder_cat === null ? '<span class="suggested-note">SUGERIDO POR EL NOMBRE</span>' : "") + "</span>" +
+              (incompat ? '<span class="cand-bad">No compatible — ' + esc(incompat) + "</span>" : "") +
+              (otherOnly ? '<span class="cand-warn">Sin piezas en ' + esc(SETTINGS.main_branch) + " — se pide de otra sucursal" +
+                (otherBranchSummary(p) ? " (" + esc(otherBranchSummary(p)) + ")" : "") + "</span>" : "") +
+              "</span>" + (isSel ? icon(I.check, "check") : "") + "</button></li>";
+          });
+          h += "</ul>";
+          if (candidates.length > shownCount) {
+            h += '<div class="cand-more"><p>Mostrando ' + page.length + " de " + candidates.length + " opciones en " + esc(c.label) + "</p>" +
+              '<button type="button" class="btn-ghost" data-pc-more="' + c.key + '" aria-label="Mostrar más opciones de ' + esc(c.label) + '">Mostrar más (' + (candidates.length - shownCount) + " más)</button></div>";
+          }
+        }
+        h += "</section>";
+      });
+      h += "</div>";
+      if (chosen.length > 0) {
+        h += '<section class="summary" aria-label="Resumen de tu PC"><h3 class="font-display">Tu PC</h3><ul>' +
+          chosen.map(function (c) {
+            return "<li><span class=\"sl\"><strong>" + esc(c.label) + ":</strong> <span class=\"nm\">" + esc(c.product.name) + "</span>" +
+              (builderOtherBranchOnly(c.product) ? '<span class="other-note">Sin piezas en ' + esc(SETTINGS.main_branch) + ": se pide de otra sucursal</span>" : "") +
+              '</span><span class="sp price-num">' + fmtMXN(c.product.price_cents) + "</span></li>";
+          }).join("") + "</ul>";
+        h += '<div class="sum-block"><div class="sum-row"><span class="k">Componentes</span><span class="v price-num">' + fmtMXN(partsTotal) + "</span></div>";
+        h += '<fieldset class="warranty"><legend>' + icon(I.shield) + 'Garantía Extendida</legend><div class="warranty-opts">' +
+          [["no", "Sin garantía extendida", null], ["nueva", "PC nueva", SETTINGS.warranty_pct_new], ["existente", "Traigo algunas partes", SETTINGS.warranty_pct_existing]].map(function (o) {
+            var selW = state.pcWarranty === o[0];
+            var sub = o[2] === null ? "" : '<span class="sub">' + (o[2] === 0 ? "Sin costo extra" : "+" + o[2] + "% = " + fmtMXN(Math.round(partsTotal * o[2] / 100))) + "</span>";
+            return '<label class="warranty-opt' + (selW ? " sel" : "") + '"><input type="radio" name="garantia-extendida" value="' + o[0] + '"' +
+              (selW ? " checked" : "") + ' aria-label="Garantía extendida: ' + esc(o[1]) + '"><span>' + esc(o[1]) + sub + "</span></label>";
+          }).join("") + "</div></fieldset>";
+        if (state.pcWarranty !== "no") {
+          h += '<div class="sum-row" style="margin-top:8px"><span class="k">Garantía Extendida (' + warrantyPct + '%)</span><span class="v price-num">' + fmtMXN(warrantyFee) + "</span></div>";
+        }
+        h += '<div class="sum-total"><span class="k">TOTAL</span><span class="v price-num silver-text">' + fmtMXN(total) + "</span></div>" +
+          '<p class="sum-card-note">' + (SETTINGS.iva_included ? "IVA incluido" : "Más IVA") + " · Con tarjeta: " + fmtMXN(cardPriceCents(total)) +
+          (SETTINGS.card_surcharge_pct > 0 ? " (+" + SETTINGS.card_surcharge_pct + "%)" : "") + "</p>";
+        if (missingBase.length > 0) {
+          h += '<p class="sum-warn">Ojo: a esta PC todavía le faltan ' + missingBase.map(function (k) { return BUILDER_LABEL[k]; }).join(", ") + " para poder funcionar.</p>";
+        }
+        if (chosen.some(function (c) { return builderOtherBranchOnly(c.product); })) {
+          h += '<p class="sum-warn">Ojo: hay piezas de tu PC que no tienen disponibilidad en ' + esc(SETTINGS.main_branch) + "; se piden de otra sucursal, así que pueden tardar un poco más en llegar.</p>";
+        }
+        if (conflicts.length) {
+          h += '<div class="conflict-box">' + conflicts.map(function (cf) { return "<p>" + esc(cf) + "</p>"; }).join("") + "</div>";
+        } else if (socketVerified) {
+          h += '<p class="sum-ok">Compatibilidad revisada: procesador y tarjeta madre son socket ' + esc(productSocket(cpuSel)) + ", sin conflictos con lo elegido.</p>";
+        }
+        h += '<p class="sum-tiny">El armador revisa el socket y el tipo de memoria con lo que dice el nombre de cada producto y bloquea lo que no combina. Si el nombre de un producto no trae ese dato, esa parte no se puede verificar aquí: pregúntanos por WhatsApp y lo confirmamos contigo.</p>';
+        h += '<div class="sum-actions">';
+        if (WA_DIGITS) {
+          var lines = ["Hola, quiero pedir esta PC armada de " + SETTINGS.store_name + ":"];
+          chosen.forEach(function (c) {
+            lines.push("• " + c.label + ": " + c.product.name + " — " + fmtMXN(c.product.price_cents) +
+              (builderOtherBranchOnly(c.product) ? " (en " + SETTINGS.main_branch + " no hay: se pide de otra sucursal)" : ""));
+          });
+          lines.push("Total de componentes: " + fmtMXN(partsTotal));
+          if (state.pcWarranty !== "no") lines.push("Garantía Extendida (" + (state.pcWarranty === "nueva" ? "PC nueva" : "con partes mías") + ", " + warrantyPct + "%): " + fmtMXN(warrantyFee));
+          lines.push("TOTAL: " + fmtMXN(total) + (SETTINGS.iva_included ? " (IVA incluido)" : " + IVA"));
+          conflicts.forEach(function (cf) { lines.push("OJO: " + cf); });
+          if (missingBase.length) lines.push("Todavía me falta elegir: " + missingBase.map(function (k) { return BUILDER_LABEL[k]; }).join(", ") + ".");
+          h += '<a class="btn-primary silver-btn" style="padding:12px 20px;font-size:16px" target="_blank" rel="noreferrer" href="https://wa.me/' + WA_DIGITS + "?text=" +
+            encodeURIComponent(lines.join("\n")) + '" aria-label="Pedir esta PC completa por WhatsApp">' + icon(I.phone) + "Pedir esta PC por WhatsApp</a>";
+        } else {
+          h += '<p class="btn-agotado-big" style="width:auto;padding:12px 20px">Pedidos por WhatsApp muy pronto</p>';
+        }
+        h += '<button type="button" class="btn-ghost" id="pcClear" aria-label="Vaciar mi PC y empezar de nuevo">' + icon(I.trash) + "Vaciar</button></div>";
+        h += "</div></section>";
+      }
+      elPc.innerHTML = h;
+      bindPc();
+    }
+    function bindPc() {
+      elPc.querySelectorAll("[data-pc-change]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-pc-change");
+          state.pcOpenCat = state.pcOpenCat === cat ? null : cat;
+          renderPc();
+        });
+      });
+      elPc.querySelectorAll("[data-pc-remove]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          delete state.pcSel[btn.getAttribute("data-pc-remove")];
+          renderPc();
+        });
+      });
+      elPc.querySelectorAll("[data-pc-pick]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var parts = btn.getAttribute("data-pc-pick").split(":");
+          state.pcSel[parts[0]] = Number(parts[1]);
+          state.pcOpenCat = null;
+          renderPc();
+        });
+      });
+      elPc.querySelectorAll("[data-pc-more]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-pc-more");
+          state.pcShown[cat] = (state.pcShown[cat] || CAND_PAGE) + CAND_PAGE;
+          renderPc();
+        });
+      });
+      elPc.querySelectorAll('input[name="garantia-extendida"]').forEach(function (r) {
+        r.addEventListener("change", function () { state.pcWarranty = r.value; renderPc(); });
+      });
+      var clr = document.getElementById("pcClear");
+      if (clr) clr.addEventListener("click", function () {
+        state.pcSel = {}; state.pcWarranty = "no"; state.pcOpenCat = null; renderPc();
+      });
+      bindCommon(elPc);
+    }
+
+    /* ------------------- Arma tu sistema de videovigilancia ---------------- */
+    function cctvChosenOf(cat) {
+      var id = state.cctvSel[cat];
+      return id !== undefined ? BY_ID[id] : undefined;
+    }
+    function cctvQtyOf(cat) { return Math.max(1, state.cctvQty[cat] || 1); }
+    function renderCctv() {
+      var chosen = [];
+      CCTV_CATS.forEach(function (c) {
+        var p = cctvChosenOf(c.key);
+        if (p) chosen.push({ cat: c.key, label: c.label, product: p, qty: cctvQtyOf(c.key) });
+      });
+      var camSel = cctvChosenOf("camara"), recSel = cctvChosenOf("grabador");
+      var hddSel = cctvChosenOf("disco_duro"), sdSel = cctvChosenOf("memoria_sd");
+      var camQty = chosen.some(function (c) { return c.cat === "camara"; }) ? cctvQtyOf("camara") : 0;
+      var warnings = [];
+      if (camSel && isWifiCamera(camSel) && !sdSel && !recSel) {
+        warnings.push("Tu cámara es WiFi: sin memoria microSD ni grabador no tiene dónde guardar el video. Elige una memoria microSD o un grabador.");
+      }
+      if (recSel && !hddSel) {
+        warnings.push("Elegiste grabador pero todavía no hay disco duro: sin disco, el DVR/XVR/NVR no puede grabar. Agrega un disco duro para videovigilancia.");
+      }
+      if (camSel && recSel) {
+        var rt = recorderType(recSel);
+        if (rt === "NVR" && !isIpCamera(camSel) && !isWifiCamera(camSel)) {
+          warnings.push("Ojo: elegiste un NVR, que trabaja con cámaras IP. Si tu cámara es analógica (coaxial/BNC), necesitas un DVR o XVR. Confírmalo por WhatsApp antes de pedir.");
+        }
+        if (rt === "DVR" && isIpCamera(camSel)) {
+          warnings.push("Ojo: elegiste un DVR, que trabaja con cámaras analógicas. Si tu cámara es IP, necesitas un NVR o un XVR compatible. Confírmalo por WhatsApp antes de pedir.");
+        }
+      }
+      var recommendedMissing = [];
+      if (camSel && !cctvChosenOf("conectores")) recommendedMissing.push("Conectores y baluns");
+      if (camSel && !cctvChosenOf("cajas")) recommendedMissing.push("Cajas con tapa");
+      if (camSel && !isWifiCamera(camSel) && !cctvChosenOf("cable")) recommendedMissing.push("Cable");
+      if (camSel && !cctvChosenOf("fuente_cctv")) recommendedMissing.push("Fuente de poder");
+      var partsTotal = chosen.reduce(function (s, c) { return s + c.product.price_cents * c.qty; }, 0);
+      var hasCam = camSel !== undefined;
+      var hasRecording = recSel !== undefined || sdSel !== undefined;
+      var anyCandidates = CCTV_CATS.some(function (c) { return cctvCandidates(c.key).length > 0; });
+
+      var h = "";
+      h += '<div class="builder-head"><span class="bh-ico">' + icon(I.video) + '</span><div><h2 class="font-display">Arma tu sistema de videovigilancia</h2>' +
+        "<p>Elige cámaras, grabador DVR, XVR o NVR, disco duro, memoria microSD si tu cámara es WiFi, conectores, cajas con tapa, cable y fuente. " +
+        "Puedes poner la cantidad que necesitas en cada paso (por ejemplo, 4 cámaras). Si una pieza no tiene disponibilidad en " + esc(SETTINGS.main_branch) +
+        " pero sí en otra sucursal, también la puedes elegir: se pide de esa sucursal. Al final pides todo junto por WhatsApp.</p></div></div>";
+      h += '<p class="builder-progress">' + chosen.length + " de " + CCTV_CATS.length + " pasos elegidos";
+      if (hasCam && hasRecording) h += ' <span class="ok">· Ya tienes cómo grabar</span>';
+      else if (chosen.length > 0) {
+        h += ' <span class="warn">· Para grabar te falta: ' + (!hasCam ? "Cámaras" : "") + (!hasCam && !hasRecording ? " y " : "") +
+          (!hasRecording ? "grabador + disco duro, o memoria microSD (cámara WiFi)" : "") + "</span>";
+      }
+      if (camQty > 1) h += ' <span class="dim">· ' + camQty + " cámaras</span>";
+      h += "</p>";
+      if (!anyCandidates) {
+        h += '<div class="builder-empty">' + icon(I.video) + '<p class="t font-display">Todavía no hay productos de videovigilancia</p>' +
+          '<p class="s">Muy pronto vas a poder armar tu sistema de videovigilancia aquí con los productos de la tienda.</p></div>';
+        elCctv.innerHTML = h;
+        return;
+      }
+      h += '<div class="builder-steps">';
+      CCTV_CATS.forEach(function (c) {
+        var candidates = cctvCandidates(c.key);
+        var selId = state.cctvSel[c.key];
+        var sel = selId !== undefined ? BY_ID[selId] : undefined;
+        var isOpen = state.cctvOpenCat === c.key;
+        var shownCount = state.cctvShown[c.key] || CAND_PAGE;
+        var isBase = CCTV_BASE_CATS.indexOf(c.key) >= 0;
+        h += '<section class="step" aria-label="Paso: ' + esc(c.label) + '"><div class="step-head"><h3 class="font-display">' + esc(c.label) +
+          (isBase ? '<span class="base-tag">BASE</span>' : "") + '</h3><span class="step-hint">' + esc(c.hint) + "</span></div>";
+        if (sel) {
+          h += selRowHtml(sel, "cctv");
+          var q = cctvQtyOf(c.key);
+          h += '<div class="qty-row"><label for="cctv-qty-' + c.key + '">Cantidad</label>' +
+            '<button type="button" class="btn-ghost" data-cctv-minus="' + c.key + '" aria-label="Quitar una pieza de ' + esc(c.label) + '">−</button>' +
+            '<input id="cctv-qty-' + c.key + '" type="number" min="1" max="99" value="' + q + '" data-cctv-qty="' + c.key + '" aria-label="Cantidad de ' + esc(c.label) + '">' +
+            '<button type="button" class="btn-ghost" data-cctv-plus="' + c.key + '" aria-label="Agregar una pieza de ' + esc(c.label) + '">+</button>' +
+            (q > 1 ? '<span class="qty-total">= ' + fmtMXN(sel.price_cents * q) + "</span>" : "") + "</div>";
+          h += '<div class="qty-row" style="margin-top:8px"><button type="button" class="btn-ghost" data-cctv-change="' + c.key + '" aria-label="Cambiar ' + esc(c.label) + '" aria-expanded="' + isOpen + '">Cambiar</button>' +
+            '<button type="button" class="btn-remove" data-cctv-remove="' + c.key + '" aria-label="Quitar ' + esc(c.label) + ' de mi sistema">Quitar</button></div>';
+        } else if (candidates.length > 0) {
+          h += '<button type="button" class="btn-primary silver-btn step-pick" data-cctv-change="' + c.key + '" aria-label="Elegir ' + esc(c.label) + '" aria-expanded="' + isOpen + '">' +
+            icon(I.plus) + "Elegir " + esc(c.label.toLowerCase()) + "</button>";
+        } else {
+          h += '<p class="step-empty">Todavía no hay productos de este paso en la tienda.</p>';
+        }
+        if (isOpen && candidates.length > 0) {
+          var page = candidates.slice(0, shownCount);
+          h += '<ul class="cand-list">';
+          page.forEach(function (p) {
+            var isSel = selId === p.id;
+            var out = !builderHasStock(p);
+            var otherOnly = builderOtherBranchOnly(p);
+            var aria = out ? p.name + " está agotado en todas las sucursales"
+              : otherOnly ? p.name + ": sin piezas en " + SETTINGS.main_branch + ", disponible en otra sucursal. Elegir como " + c.label
+              : "Elegir " + p.name + " como " + c.label;
+            h += '<li><button type="button" class="cand' + (isSel ? " is-sel" : "") + '" data-cctv-pick="' + c.key + ":" + p.id + '"' +
+              (out ? " disabled" : "") + ' aria-label="' + esc(aria) + '">' +
+              thumbHtml(p, "cand-thumb") + '<span class="cand-info"><span class="cand-name">' + esc(p.name) + '</span>' +
+              '<span class="cand-meta"><span class="cand-price price-num silver-text">' + fmtMXN(p.price_cents) + "</span>" +
+              (otherOnly ? '<span class="chip-outline">OTRA SUCURSAL</span>' : stockBadge(p.stock_status)) +
+              (c.key === "camara" && isWifiCamera(p) ? '<span class="chip">WIFI</span>' : "") +
+              (c.key === "camara" && isIpCamera(p) ? '<span class="chip">IP</span>' : "") +
+              (c.key === "grabador" && recorderType(p) ? '<span class="chip">' + recorderType(p) + "</span>" : "") +
+              (p.cctv_cat === null ? '<span class="suggested-note">SUGERIDO POR EL NOMBRE</span>' : "") + "</span>" +
+              (otherOnly ? '<span class="cand-warn">Sin piezas en ' + esc(SETTINGS.main_branch) + " — se pide de otra sucursal" +
+                (otherBranchSummary(p) ? " (" + esc(otherBranchSummary(p)) + ")" : "") + "</span>" : "") +
+              "</span>" + (isSel ? icon(I.check, "check") : "") + "</button></li>";
+          });
+          h += "</ul>";
+          if (candidates.length > shownCount) {
+            h += '<div class="cand-more"><p>Mostrando ' + page.length + " de " + candidates.length + " opciones en " + esc(c.label) + "</p>" +
+              '<button type="button" class="btn-ghost" data-cctv-more="' + c.key + '" aria-label="Mostrar más opciones de ' + esc(c.label) + '">Mostrar más (' + (candidates.length - shownCount) + " más)</button></div>";
+          }
+        }
+        h += "</section>";
+      });
+      h += "</div>";
+      if (chosen.length > 0) {
+        h += '<section class="summary" aria-label="Resumen de tu sistema de videovigilancia"><h3 class="font-display">Tu sistema de videovigilancia</h3><ul>' +
+          chosen.map(function (c) {
+            return "<li><span class=\"sl\"><strong>" + esc(c.label) + ":</strong> <span class=\"nm\">" + (c.qty > 1 ? c.qty + " × " : "") + esc(c.product.name) + "</span>" +
+              (builderOtherBranchOnly(c.product) ? '<span class="other-note">Sin piezas en ' + esc(SETTINGS.main_branch) + ": se pide de otra sucursal</span>" : "") +
+              '</span><span class="sp price-num">' + fmtMXN(c.product.price_cents * c.qty) + "</span></li>";
+          }).join("") + "</ul>";
+        h += '<div class="sum-block"><div class="sum-total" style="border-top:none;margin-top:0;padding-top:0"><span class="k">TOTAL</span><span class="v price-num silver-text">' + fmtMXN(partsTotal) + "</span></div>" +
+          '<p class="sum-card-note">' + (SETTINGS.iva_included ? "IVA incluido" : "Más IVA") + " · Con tarjeta: " + fmtMXN(cardPriceCents(partsTotal)) +
+          (SETTINGS.card_surcharge_pct > 0 ? " (+" + SETTINGS.card_surcharge_pct + "%)" : "") + "</p>";
+        warnings.forEach(function (w) { h += '<p class="sum-warn">' + esc(w) + "</p>"; });
+        if (recommendedMissing.length && hasCam) {
+          h += '<p class="sum-dim">Recomendados que aún no eliges: ' + esc(recommendedMissing.join(", ")) + ". Sin ellos el sistema puede quedar incompleto para instalar.</p>";
+        }
+        if (chosen.some(function (c) { return builderOtherBranchOnly(c.product); })) {
+          h += '<p class="sum-warn">Ojo: hay piezas que no tienen disponibilidad en ' + esc(SETTINGS.main_branch) + "; se piden de otra sucursal y pueden tardar un poco más.</p>";
+        }
+        h += '<div class="sum-actions">';
+        if (WA_DIGITS) {
+          var lines = ["Hola, quiero pedir este sistema de videovigilancia de " + SETTINGS.store_name + ":"];
+          chosen.forEach(function (c) {
+            lines.push("• " + c.label + ": " + (c.qty > 1 ? c.qty + " × " : "") + c.product.name + " — " + fmtMXN(c.product.price_cents * c.qty) +
+              (builderOtherBranchOnly(c.product) ? " (en " + SETTINGS.main_branch + " no hay: se pide de otra sucursal)" : ""));
+          });
+          lines.push("TOTAL: " + fmtMXN(partsTotal) + (SETTINGS.iva_included ? " (IVA incluido)" : " + IVA"));
+          warnings.forEach(function (w) { lines.push("OJO: " + w); });
+          if (!hasCam) lines.push("Todavía me falta elegir las cámaras.");
+          else if (!hasRecording) lines.push("Todavía me falta elegir cómo grabar (grabador + disco duro, o memoria microSD para cámara WiFi).");
+          if (recommendedMissing.length) lines.push("Sin elegir todavía (recomendados): " + recommendedMissing.join(", ") + ".");
+          h += '<a class="btn-primary silver-btn" style="padding:12px 20px;font-size:16px" target="_blank" rel="noreferrer" href="https://wa.me/' + WA_DIGITS + "?text=" +
+            encodeURIComponent(lines.join("\n")) + '" aria-label="Pedir este sistema de videovigilancia completo por WhatsApp">' + icon(I.phone) + "Pedir este sistema por WhatsApp</a>";
+        } else {
+          h += '<p class="btn-agotado-big" style="width:auto;padding:12px 20px">Pedidos por WhatsApp muy pronto</p>';
+        }
+        h += '<button type="button" class="btn-ghost" id="cctvClear" aria-label="Vaciar mi sistema de videovigilancia y empezar de nuevo">' + icon(I.trash) + "Vaciar</button></div>";
+        h += "</div></section>";
+      }
+      elCctv.innerHTML = h;
+      bindCctv();
+    }
+    function bindCctv() {
+      elCctv.querySelectorAll("[data-cctv-change]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cctv-change");
+          state.cctvOpenCat = state.cctvOpenCat === cat ? null : cat;
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-remove]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cctv-remove");
+          delete state.cctvSel[cat];
+          delete state.cctvQty[cat];
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-pick]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var parts = btn.getAttribute("data-cctv-pick").split(":");
+          state.cctvSel[parts[0]] = Number(parts[1]);
+          if (!state.cctvQty[parts[0]]) state.cctvQty[parts[0]] = 1;
+          state.cctvOpenCat = null;
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-more]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cctv-more");
+          state.cctvShown[cat] = (state.cctvShown[cat] || CAND_PAGE) + CAND_PAGE;
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-minus]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cctv-minus");
+          state.cctvQty[cat] = Math.max(1, cctvQtyOf(cat) - 1);
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-plus]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var cat = btn.getAttribute("data-cctv-plus");
+          state.cctvQty[cat] = Math.min(99, cctvQtyOf(cat) + 1);
+          renderCctv();
+        });
+      });
+      elCctv.querySelectorAll("[data-cctv-qty]").forEach(function (inp) {
+        inp.addEventListener("change", function () {
+          var cat = inp.getAttribute("data-cctv-qty");
+          var v = parseInt(inp.value, 10);
+          state.cctvQty[cat] = isNaN(v) ? 1 : Math.max(1, Math.min(99, v));
+          renderCctv();
+        });
+      });
+      var clr = document.getElementById("cctvClear");
+      if (clr) clr.addEventListener("click", function () {
+        state.cctvSel = {}; state.cctvQty = {}; state.cctvOpenCat = null; renderCctv();
+      });
+      bindCommon(elCctv);
+    }
+
+    /* ------------------------------- Inicio ------------------------------- */
+    document.getElementById("navTienda").addEventListener("click", function () { go("tienda"); });
+    document.getElementById("navPc").addEventListener("click", function () { go("pc"); });
+    document.getElementById("navCctv").addEventListener("click", function () { go("cctv"); });
+    var loading = document.getElementById("loadingNote");
+    if (loading) loading.remove();
+    renderTienda();
+    showView();
+    </script>
+  </body>
+</html>
